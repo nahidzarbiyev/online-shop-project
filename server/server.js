@@ -8,11 +8,13 @@ const bodyParser = require("body-parser");
 
 //routes
 const authRouter = require("./routes/auth");
+const adminauthRouter = require("./routes/admin/auth");
 
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use('/api', authRouter)
+app.use('/api', adminauthRouter)
 env.config();
 
 const PORT = process.env.PORT || 8080;

@@ -1,11 +1,16 @@
 
 import './App.css'
+import Header from './assets/layouts/header'
+import Routing from './assets/routes'
 
 function App() {
 
   return (
    <>
-   test</>
+  
+    
+  <Routing/>
+    </>
   )
 }
 

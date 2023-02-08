@@ -4,55 +4,39 @@ exports.addItemToCart = (req, res) => {
   Cart.findOne({ user: req.user._id }).exec((error, cart) => {
     if (error) return res.status(400).json(error);
     if (cart) {
+      const product = req.body.cardItems.product;
 
-
-
-        const product = req.body.cardItems.product
-
-
-        const item = cart.cardItems.find(q=>q.product==product)
-
-        if (item) {
-            
-      Cart.findOneAndUpdate(
-        { "user": req.user._id, "cardItems.product":product },
-        {
+      const item = cart.cardItems.find((q) => q.product == product);
+      let condition, update;
+      if (item) {
+        condition = { user: req.user._id, "cardItems.product": product };
+        update = {
           $set: {
-            cardItems: {...req.body.cardItems,
-            quantity: item.quantity + req.body.cardItems.quantity
-        },
+            "cardItems.$": {
+              ...req.body.cardItems,
+              quantity: item.quantity + req.body.cardItems.quantity,
+            },
           },
-        }
-      )
-      .exec((error,_cart)=>{
-        if (error) return res.status(400).json({error})
+        };
+      
+      } else {
+
+        condition = { user: req.user._id }
+        update = {
+            $push: {
+              cardItems: req.body.cardItems,
+            },
+          }
+      }
+      Cart.findOneAndUpdate(
+        condition,
+        update
+      ).exec((error, _cart) => {
+        if (error) return res.status(400).json({ error });
         if (_cart) {
-            return res.status(201).json({cart:_cart})
+          return res.status(201).json({ cart: _cart });
         }
-      })
-        }
-        else{
-
-            Cart.findOneAndUpdate(
-                { user: req.user._id },
-                {
-                  "$push": {
-                    "cardItems": req.body.cardItems,
-                  },
-                }
-              )
-              .exec((error,_cart)=>{
-                if (error) return res.status(400).json({error})
-                if (_cart) {
-                    return res.status(201).json({cart:_cart})
-                }
-              })
-        }
-
-
-
-
-
+      });
 
       // res.status(200).json({message:cart})
     } else {

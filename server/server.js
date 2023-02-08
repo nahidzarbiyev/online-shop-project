@@ -1,30 +1,18 @@
-const env = require(`dotenv`);
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const fileUpload = require("express-fileupload");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-
+const express = require('express');
+const env = require('dotenv');
 const app = express();
-// //routes
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-app.use('/user', require('./routes/userRouter') )
+//routes
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin/auth');
 
-
-
-// const authRouter = require("./routes/auth");
-// const adminauthRouter = require("./routes/admin/auth");
-
-app.use(express.json());
-app.use(cookieParser());
-app.use(fileUpload({
-  useTempFiles:true
-}))
+//environment variable or you can say constants
 env.config();
 
-const PORT = process.env.PORT || 8080;
-
+// mongodb connection
+//mongodb+srv://root:<password>@cluster0.8pl1w.mongodb.net/<dbname>?retryWrites=true&w=majority
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -34,14 +22,19 @@ mongoose
     console.log("db connected");
   });
 
-//   app.use("/api", authRouter);
-// app.use("/api", adminauthRouter);
+app.use(bodyParser.json());
+app.use('/api', authRoutes);
+app.use('/api', adminRoutes);
 
-app.get("/", (req, res) => {
-  res.send("hello");
-  console.log("connect");
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`server is running http://localhost:${PORT}`);
-});
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("db connected");
+  });

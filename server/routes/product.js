@@ -1,5 +1,5 @@
 const express = require("express");
-const { requireSignin } = require("../controller/admin/auth");
+const { requireSignin } = require("../middleware/index");
 const router = express.Router();
 const multer = require('multer')
 const { adminMiddleware } = require("../middleware");

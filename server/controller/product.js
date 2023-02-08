@@ -1,6 +1,6 @@
 const Product = require("../models/product");
 const shortid = require("shortid");
-const product = require("../models/product");
+// const product = require("../models/product");
 exports.createProduct = (req, res) => {
   const slugify = require("slugify");
   // res.status(200).json({file:req.files, body:req.body})

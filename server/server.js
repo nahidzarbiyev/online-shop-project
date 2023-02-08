@@ -1,6 +1,7 @@
 const express = require('express');
 const env = require('dotenv');
 const app = express();
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path')
@@ -25,6 +26,7 @@ mongoose
   });
 
 app.use(bodyParser.json());
+app.use(cors())
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', categoryRoutes);

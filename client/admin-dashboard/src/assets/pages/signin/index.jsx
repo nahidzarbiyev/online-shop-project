@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../images/nike_PNG9.png";
+import {login} from  '../../redux/actions'
+import { useDispatch, useSelector } from "react-redux";
+import Header from "../../layouts/header";
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, "Too Short!")
@@ -13,13 +16,11 @@ const SignupSchema = Yup.object().shape({
     .max(50, "Too Long!")
     .required("Required"),
   password: Yup.string()
-    .min(8, { length: "Password too short" })
-    .matches(/\d+/, { message: { number: "Password no number" } })
-    .matches(/[a-z]+/, { message: { lowercase: "Password no lowercase" } })
-    .matches(/[A-Z]+/, { message: { uppercase: "Password no uppercase" } })
-    .matches(/[!@#$%^&*()-+]+/, {
-      message: { special: "Password no special char" },
-    })
+    .min(8)
+    .matches(/\d+/ )
+    .matches(/[a-z]+/)
+    .matches(/[A-Z]+/)
+    .matches(/[!@#$%^&*()-+]+/)
 
     .required("password is required: password: uppercase, lowercase, number, no spaces, special characters"),
 
@@ -29,8 +30,41 @@ const SignupSchema = Yup.object().shape({
     .matches(/^(?!.*@[^,]*,)/),
 });
 
+
+
 const Signin = () => {
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [error, setError] = useState('')
+const [toggle, settogle] = useState(true)
+const dispatch = useDispatch()
+// useEffect(() => {
+//   if (!auth.authenticate) {
+//     dispatch(userLoggedin())
+    
+//   }
+
+// }, [])
+
+const navigate = useNavigate()
+const auth = useSelector(state=>state.auth)
+  const userLogin = (e)=>{
+    e.preventDefault()
+    const user = {
+    email, password
+    }
+  
+   dispatch( login(user))
+   
+  
+  }
+
+  if (auth.authenticate) {
+    navigate('/')
+   }
+
   return (
+ <>
     <div className="h-[100vh] flex gap-5 justify-center items-center bg-hero-pattern bg-cover">
       <div className="p-10 bg-dark max-w-[400px] min-h-[300px] flex flex-col gap-8 items-center justify-between">
         <img src={Logo} alt="" width={"70px"} />
@@ -50,7 +84,7 @@ const Signin = () => {
           © 2023 Nike, Inc. All Rights Reserved
         </span>
       </div>
-      <Formik
+      {/* <Formik
         initialValues={{
           firstName: "",
           lastName: "",
@@ -59,8 +93,8 @@ const Signin = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          // same shape as initial values
-          console.log(values);
+          userLogin
+
         }}
       >
         {({ errors, touched }) => (
@@ -108,8 +142,18 @@ const Signin = () => {
             </div>
           </Form>
         )}
-      </Formik>
+      </Formik> */}
+      <form action="" className="flex flex-col gap-8 items-center justify-center" onSubmit={userLogin}>
+     
+        <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="border placeholder:text-sm  outline-none p-2 w-96 rounded-lg"/>
+        <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}  placeholder=" password" className="border placeholder:text-sm  outline-none p-2 w-96 rounded-lg"/>
+        <button type="submit" 
+                className=" px-10 py-2 bg-dark rounded-lg text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary"
+        
+        >submit</button>
+      </form>
     </div>
+ </>
   );
 };
 

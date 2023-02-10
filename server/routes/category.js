@@ -1,27 +1,51 @@
-const express = require('express')
-const router = express.Router()
-const { addCategory, getCategories } = require('../controller/category')
-const { adminMiddleware,requireSignin } = require('../middleware')
-const shortid = require('shortid')
+const express = require("express");
+const {
+  addCategory,
+  getCategories,
+  updateCategories,
+  deleteCategories,
+} = require("../controller/category");
+const {
+  requireSignin,
+  adminMiddleware,
+  // superAdminMiddleware,
+} = require("../middleware");
+const router = express.Router();
+const shortid = require("shortid");
 const path = require("path");
-const multer = require('multer')
+const multer = require("multer");
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(path.dirname(__dirname), "uploads"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, shortid.generate() + "-" + file.originalname);
+  },
+});
 
-let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(path.dirname(__dirname), "uploads"));
-    },
-    filename: function (req, file, cb) {
-      cb(null, shortid.generate() + "-" + file.originalname);
-    },
-  });
+const upload = multer({ storage });
 
-  const upload = multer({storage})
+router.post(
+  "/category/create",
+  requireSignin,
+  // superAdminMiddleware,
+  upload.single("categoryImage"),
+  addCategory
+);
+router.get("/category/getcategory", getCategories);
+router.post(
+  "/category/update",
+  requireSignin,
+  // superAdminMiddleware,
+  upload.array("categoryImage"),
+  updateCategories
+);
+router.post(
+  "/category/delete",
+  requireSignin,
+  // superAdminMiddleware,
+  deleteCategories
+);
 
-
-
-router.post('/category/create',requireSignin,adminMiddleware, upload.single('categoryImage'),addCategory)
-router.get('/category/getcategory',getCategories)
-
-
-module.exports = router
+module.exports = router;

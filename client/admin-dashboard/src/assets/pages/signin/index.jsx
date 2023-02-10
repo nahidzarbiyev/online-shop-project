@@ -59,9 +59,11 @@ const auth = useSelector(state=>state.auth)
   
   }
 
+ useEffect(()=>{
   if (auth.authenticate) {
     navigate('/')
    }
+ })
 
   return (
  <>

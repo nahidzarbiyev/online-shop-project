@@ -9,7 +9,7 @@ export const signup = (user) => {
       ...user,
     });
 
-    if (res.status === 200) {
+    if (res.status === 201) {
       const { message } = res.data;
 
       dispatch({

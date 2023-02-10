@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
@@ -39,9 +39,14 @@ const navigate = useNavigate()
 const dispatch = useDispatch()
 const user = useSelector(state=>state.user)
 const auth = useSelector(state=>state.auth)
+ useEffect(() => {
+   
   if (auth.authenticate) {
-    navigate('/')
+    navigate('/sign-in')
    }
+
+ }, [])
+ 
 
    const Signup = (e)=>{
     e.preventDefault()
@@ -51,6 +56,7 @@ const auth = useSelector(state=>state.auth)
    }
 
  
+   console.log(user.loading)
   return (
 <>
 {

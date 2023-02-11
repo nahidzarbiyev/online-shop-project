@@ -95,7 +95,7 @@ const handleCategory = (categories)=>{
           </option>
         {
           categoryList(category.categories).map(option=>{
-            console.log(option.name)
+          
             return (
               <option key={option.value} value={option.value}>{option.name}</option>
             )

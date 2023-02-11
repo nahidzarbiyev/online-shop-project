@@ -4,7 +4,7 @@ const shortid = require("shortid");
 exports.createProduct = (req, res) => {
   const slugify = require("slugify");
   // res.status(200).json({file:req.files, body:req.body})
-  let { name, price, description, category, createdBy,quantity } =
+  let { name, price, description, category, createdBy,quantity, size } =
     req.body;
 
   let productPictures = []
@@ -22,7 +22,8 @@ exports.createProduct = (req, res) => {
     category,
    productPictures,
     createdBy: req.user._id,
-    quantity
+    quantity,
+    size
   });
 
   product.save(((error, product) => {

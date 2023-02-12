@@ -9,7 +9,7 @@ import Img4 from '../../images/productSlidesImg/resmi-nike-sitesi (3).jpg'
 import Img5 from '../../images/productSlidesImg/resmi-nike-sitesi (4).jpg'
 const ProductSlides = () => {
     const settings = {
-      className: "center w-full border-transparent w-[100vw]  ",
+      className: "center w-full border-transparent w-[96vw]  overflow-x-hidden ",
       centerMode: true,
       infinite: true,
       centerPadding: "60px",

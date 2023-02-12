@@ -46,19 +46,19 @@ const DahaFazlaKesfet = () => {
         <div className="mx-1 relative">
           <img src={CategoryImg1}  alt="" />
           <div className="absolute flex gap-2 z-30 bottom-10 left-12">
-    <Link className="px-6 py-2 bg-white hover:bg-primary text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-primary bg-white text-dark items-center rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
+    <Link className="px-6 py-2 bg-white hover:bg-secondary text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-secondary bg-white text-dark items-center rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
           </div>
         </div>
         <div className="mx-1 relative">
           <img src={CategoryImg2} alt="" />
           <div className="absolute flex gap-2 z-30 bottom-10 left-12">
-    <Link className="px-6 py-2 bg-white hover:bg-primary text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-primary bg-white text-dark items-center rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
+    <Link className="px-6 py-2 bg-white hover:bg-secondary text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-secondary bg-white text-dark items-center rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
           </div>
         </div>
         <div className="mx-1 relative">
           <img src={CategoryImg3} alt="" />
           <div className="absolute flex gap-2 z-30 bottom-10 left-12">
-    <Link className="px-6 py-2 hover:bg-primary bg-white text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-primary items-center bg-white text-dark rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
+    <Link className="px-6 py-2 hover:bg-secondary bg-white text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-secondary items-center bg-white text-dark rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
           </div>
         </div>
         </Slider>

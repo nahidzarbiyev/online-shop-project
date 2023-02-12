@@ -10,7 +10,8 @@ module.exports = {
       dark:"#111"
     },
       fontFamily:{
-        Roboto:['Roboto']
+        Roboto:['Roboto'],
+        Anton:['Anton']
       }
     },
   },

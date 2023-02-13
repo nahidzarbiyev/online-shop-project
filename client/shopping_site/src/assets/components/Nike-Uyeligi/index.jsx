@@ -10,7 +10,7 @@ import NikeUyeImg5 from '../../images/nike-uyeligi/resmi-nike-sitesi (22).jpg'
 
 const NikeUyeligi = () => {
   const settings = {
-    className: "center w-full border-transparent w-[93.5vw] ml-[3.25rem] overflow-x-hidden ",
+    className: "center w-full border-transparent max-w-[93.5vw] ml-[3.25rem] overflow-x-hidden ",
     centerMode: true,
     infinite: true,
     slidesToShow: 3,

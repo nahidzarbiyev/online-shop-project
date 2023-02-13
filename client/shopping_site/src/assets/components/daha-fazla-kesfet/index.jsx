@@ -9,7 +9,7 @@ import {TfiEye} from 'react-icons/tfi'
 import { Link } from "react-router-dom";
 const DahaFazlaKesfet = () => {
   const settings = {
-    className:'-mx-2',
+    className:'-mx-2 w-full border-transparent max-w-[93.5vw] overflow-x-hidden ',
     dots: true,
     infinite: true,
     slidesToShow: 3,

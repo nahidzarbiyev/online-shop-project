@@ -12,7 +12,7 @@ import SporImg7 from '../../images/spora-gore-incele/resmi-nike-sitesi (14).jpg'
 import SporImg8 from '../../images/spora-gore-incele/resmi-nike-sitesi (15).jpg'
 const SporaGoreKesfet = () => {
   const settings = {
-    className: "center w-full border-transparent w-[93.5vw] ml-[3.25rem] overflow-x-hidden ",
+    className: "center w-full border-transparent max-w-[93.5vw] ml-[3.25rem] overflow-x-hidden ",
     centerMode: true,
     infinite: true,
     slidesToShow: 3,

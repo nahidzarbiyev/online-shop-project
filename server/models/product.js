@@ -23,6 +23,11 @@ const productSchema = new mongoose.Schema(
         default:[],
         required:true
       },
+      color:{
+        type: Array,
+        default:[],
+        required:true
+      },
       quantity:{
         type:Number,
         required:true,

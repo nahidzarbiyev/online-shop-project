@@ -11,6 +11,7 @@ import Register from "../pages/register";
 import Settings from "../pages/settings";
 import Signin from "../pages/signin";
 import { userLoggedin } from "../redux/actions";
+import { getInitialData } from "../redux/actions/initialData.actions";
 
 const Routing = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Routing = () => {
     if (!auth.authenticate) {
       dispatch(userLoggedin());
     }
+    dispatch(getInitialData())
   }, []);
 
   const token = localStorage.getItem("token");

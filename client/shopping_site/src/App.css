@@ -5,15 +5,26 @@
 @tailwind utilities;
 
 @layer components {
-  .navbar {
-    @apply border-b-2 border-black;
+
+  .navbar > ul > li > span {
+    @apply  pt-2 transition-all duration-300 cursor-pointer px-5;
   }
-  .navbar-p {
-    @apply p-3 border-b-2 border-white;
+  .navbar > ul > li > span:hover {
+    @apply text-gray-700  ;
   }
-  .navbar-p:hover .dropdown {
-    @apply opacity-100 visible;
+  .navbar > ul > li > ul {
+    @apply bg-white absolute z-30 left-0 right-0 invisible  opacity-0 p-4 py-10 transition-all duration-300 flex justify-around gap-2  ;
   }
+  .navbar > ul > li:hover > ul {
+    @apply bg-white absolute z-30 left-0 right-0 visible opacity-100  flex ;
+  }
+  .navbar > ul > li > ul> li {
+    @apply mx-5 text-gray-500 my-2 text-sm;
+  }
+  .navbar > ul > li > ul> li> a{
+    @apply font-bold text-dark py-6 text-[16px] text-center;
+  }
+ 
 }
 
 * {

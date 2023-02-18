@@ -40,7 +40,7 @@ const Categories = () => {
     for (let category of categories) {
       categoryArray.push(
         <>
-          <li className="uppercase text-sm font-bold  text-dark mx-5 p-2">
+          <li className="uppercase text-sm font-bold  text-dark mx-5 p-2" key={category?.name}>
             {category.name}
 
             {category.children.length > 0 ? (

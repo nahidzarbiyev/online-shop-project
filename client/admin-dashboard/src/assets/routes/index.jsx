@@ -21,6 +21,7 @@ const Routing = () => {
       dispatch(userLoggedin());
     }
     dispatch(getInitialData())
+    navigate("/sign-in") 
   }, []);
 
   const token = localStorage.getItem("token");
@@ -38,16 +39,18 @@ const Routing = () => {
       :
       <Header/>
     }
-      <Routes>
+      {
+        
+        <Routes>
         <Route path="/sign-up" element={<Register />} />
+        <Route path="/sign-in" exact element={<Signin />} />
 
         <Route path="/" element={<DashboardHome/>}/>
         <Route path="/orders" element={<Orders/>}/>
         <Route path="/products" element={<Products/>}/>
         <Route path="/categories" element={<Categories/>}/>
         <Route path="/settings" element={<Settings/>}/>
-        <Route path="/sign-in" exact element={<Signin />} />
-      </Routes>
+      </Routes>}
     </>
   );
 };

@@ -5,6 +5,7 @@ import Footer from '../layouts/footer'
 import Header from '../layouts/header'
 import HelpHeader from '../layouts/helpheader'
 import Home from '../pages/home'
+import ProductsPage from '../pages/productsPage'
 
 const Routing = () => {
   return (
@@ -13,7 +14,8 @@ const Routing = () => {
   <Header/>
   <SaleCarusel/>
   <Routes>
-    <Route path='/' element={<Home/>}/>
+    <Route path='/' exact element={<Home/>}/>
+    <Route path='/:slug' exact element={<ProductsPage/>}/>
   </Routes>
   <Footer/>
   </>

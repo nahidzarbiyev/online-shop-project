@@ -29,7 +29,7 @@ const HelpHeader = () => {
                 <Link>İadeler </Link>
               </li>
               <li>
-                <Link>Beden Numara Çizelgeleri</Link>
+                <Link to={'/size'}>Beden Numara Çizelgeleri</Link>
               </li>
               <li>
                 <Link>Bize Ulaş</Link>

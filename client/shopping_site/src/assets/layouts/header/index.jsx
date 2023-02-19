@@ -27,7 +27,7 @@ const Header = () => {
           <li  key={category?.name}  >
 
             {
-              category.parentId ? <Link to={`${category.slug}`} className="hover:text-dark py-3 ">{category.name}</Link> :
+              category.parentId ? <Link to={`/${category.slug}`} className="hover:text-dark py-3 " key={category.name}>{category.name}</Link> :
               <span className="text-xl" >{category.name}</span>
             }
             
@@ -64,7 +64,7 @@ const Header = () => {
 
 
 <div className="navbar w-full  h-10 bg-white ">
-       <ul className="flex mx-14 justify-center items-center pt-2 ml-56 relative">
+       <ul  className="flex mx-14 justify-center items-center pt-2 ml-56 relative">
             {
               category.categories.length>0 ? handleCategory(category.categories): null
             }

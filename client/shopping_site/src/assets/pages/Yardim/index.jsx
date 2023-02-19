@@ -407,13 +407,14 @@ Siparişimin gümrükten geçmesi gerekiyor mu?"
                   aksesuarlar dahil aşağıdaki beden/numara çizelgelerimize göz
                   atabilirsin. Ayrıca, tüm ürün sayfalarımızda uygun
                   beden/numara çizelgesi bağlantılarını bulabilirsin.
-                </p>
-                <Link
-                  to="/nike/size"
+                  <Link
+                  to="/size"
                   className="px-7 py-2 block w-72 text-center text-white bg-dark rounded-3xl m-4 "
                 >
                   NİKE BEDEN/NUMARA CİZELGELERİ
                 </Link>
+                </p>
+                
               </Panel>
               <Panel
                 header="Nike By You'nin kişiselleştirme politikası nedir?"

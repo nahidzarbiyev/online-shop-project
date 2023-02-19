@@ -7,6 +7,7 @@ import HelpHeader from '../layouts/helpheader'
 import Home from '../pages/home'
 import ProductsPage from '../pages/productsPage'
 import Size from '../pages/size'
+import StoreMap from '../pages/storeMap'
 import Yardim from '../pages/Yardim'
 
 const Routing = () => {
@@ -21,6 +22,7 @@ const Routing = () => {
     <Route path='/:slug' exact element={<ProductsPage/>}/>
     <Route path='/help' element={<Yardim/>} />
     <Route path='/size' element={<Size/>}/>
+    <Route path='/retail' element={<StoreMap/>} />
   </Routes>
   <Footer/>
   </>

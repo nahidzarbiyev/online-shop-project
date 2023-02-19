@@ -11,7 +11,7 @@ const HelpHeader = () => {
           <img src={Converse} width={"25px"} alt="" />
         </div>
         <div className="flex gap-2  text-dark text-xs   ">
-          <Link className="hover:opacity-70">Find a Store</Link> <span>|</span>{" "}
+          <Link to={'/retail'} className="hover:opacity-70">Find a Store</Link> <span>|</span>{" "}
         <div className="navbar-p p-0 border-none ">  <Link className="hover:opacity-70 ">Help
           </Link> 
           

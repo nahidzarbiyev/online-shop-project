@@ -16,7 +16,7 @@ const HelpHeader = () => {
           </Link> 
           
           <div className="absolute dropdown top-10 bg-white z-30  right-24 transition-all duration-300 opacity-0 invisible h-0 py-10   -translate-y-2  ">
-              <NavLink className=' text-dark text-[16px] px-10 py-2 mb-4'>Yardım</NavLink>
+              <NavLink to={'/help'} className=' text-dark text-[16px] px-10 py-2 mb-4'>Yardım</NavLink>
             <ul className=" text-gray-500 text-sm gap-y-2 mt-5 px-10  bg-white flex flex-col">
               <li>
                 <Link>Sipariş durumu</Link>

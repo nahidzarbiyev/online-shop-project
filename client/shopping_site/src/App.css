@@ -6,11 +6,21 @@
 
 @layer components {
 
-  .navbar > ul > li > span {
+  .navbar-p {
+    @apply p-3 border-b-2 border-white;
+  }
+  .navbar-p:hover .dropdown {
+    @apply opacity-100 visible;
+  }
+}
+
+
+
+.navbar > ul > li > span {
     @apply  pt-2 transition-all duration-300 cursor-pointer px-5;
   }
   .navbar > ul > li > span:hover {
-    @apply text-gray-700  ;
+    @apply text-gray-700 border-b-2 border-black ;
   }
   .navbar > ul > li > ul {
     @apply bg-white absolute z-30 left-0 right-0 invisible  opacity-0 p-4 py-10 transition-all duration-300 flex justify-around gap-2  ;
@@ -24,8 +34,6 @@
   .navbar > ul > li > ul> li> a{
     @apply font-bold text-dark py-6 text-[16px] text-center;
   }
- 
-}
 
 * {
   font-family: "Roboto";

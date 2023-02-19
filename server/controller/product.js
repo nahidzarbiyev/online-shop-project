@@ -38,48 +38,65 @@ exports.createProduct = (req, res) => {
 exports.getProductsBySlug = (req, res) => {
   const { slug } = req.params;
   Category.findOne({ slug: slug })
-    .select("_id")
-    .exec((err, category) => {
-      if (err) {
-        return res.status(400).json({ err });
+    .select("_id type")
+    .exec((error, category) => {
+      if (error) {
+        return res.status(400).json({ error });
       }
+
       if (category) {
-        Product.find({ category: category._id }).exec((err, products) => {
-          if (err) {
-            return res.status(400).json({ err });
+        Product.find({ category: category._id }).exec((error, products) => {
+          if (error) {
+            return res.status(400).json({ error });
           }
 
-          if (products.length > 0) {
-            res.status(200).json({
-              products,
-              productsPrice: {
-                under3h: products.filter((product) => product.price <= 300),
-                under4h: products.filter(
-                  (product) => product.price > 300 && product.price <= 400
-                ),
-                under5h: products.filter(
-                  (product) => product.price > 400 && product.price <= 500
-                ),
-                under8h: products.filter(
-                  (product) => product.price > 500 && product.price <= 800
-                ),
-                under1k: products.filter(
-                  (product) => product.price > 800 && product.price <= 1000
-                ),
-                under15h: products.filter(
-                  (product) => product.price > 1000 && product.price <= 1500
-                ),
-                under2k: products.filter(
-                  (product) => product.price > 1500 && product.price <= 2000
-                ),
-                under25h: products.filter(
-                  (product) => product.price > 2000 && product.price <= 2500
-                ),
-                under3k: products.filter(
-                  (product) => product.price > 2500 && product.price <= 3000
-                ),
-              },
-            });
+          if (category.type) {
+            if (products.length > 0) {
+              res.status(200).json({
+                products,
+                priceRange: {
+                  under3h: 300,
+                  under4h: 400,
+                  under5h: 500,
+                  under8h: 800,
+                  under1k: 1000,
+                  under15h: 1500,
+                  under2k: 2000,
+                  under25h: 2500,
+                  under3k: 3000,
+                },
+
+                productsPrice: {
+                  under3h: products.filter((product) => product.price <= 300),
+                  under4h: products.filter(
+                    (product) => product.price > 300 && product.price <= 400
+                  ),
+                  under5h: products.filter(
+                    (product) => product.price > 400 && product.price <= 500
+                  ),
+                  under8h: products.filter(
+                    (product) => product.price > 500 && product.price <= 800
+                  ),
+                  under1k: products.filter(
+                    (product) => product.price > 800 && product.price <= 1000
+                  ),
+                  under15h: products.filter(
+                    (product) => product.price > 1000 && product.price <= 1500
+                  ),
+                  under2k: products.filter(
+                    (product) => product.price > 1500 && product.price <= 2000
+                  ),
+                  under25h: products.filter(
+                    (product) => product.price > 2000 && product.price <= 2500
+                  ),
+                  under3k: products.filter(
+                    (product) => product.price > 2500 && product.price <= 3000
+                  ),
+                },
+              });
+            }
+          } else {
+            res.status(200).json({ products });
           }
         });
       }

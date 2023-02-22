@@ -6,13 +6,14 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table } from 'antd';
 import { useRef } from 'react';
 import Highlighter from 'react-highlight-words';
+import axios from "axios";
 const TableAntd = () => {
   const product = useSelector((state) => state.product);
   console.log(product.products);
 const [toggle, setToggle] = useState(false)
 const handleModalDetails = (obj)=>{
- <p className="text-white"> {obj.name}</p>
-console.log(obj.name);
+  axios.get()
+console.log(obj);
   setToggle(!toggle)
 }
 

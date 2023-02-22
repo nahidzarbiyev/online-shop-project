@@ -43,7 +43,7 @@ const category = useSelector(state=> state.category)
     products?.products?.map((product)=>{
       return (
       <div key={product?._id} className='max-w-[500px] relative flex flex-col gap-2 text-gray-500'>
-        <img className='  w-full ' src={`http://localhost:8080/public/${product?.productPictures[0].img}`} alt="" />
+        <img className='  w-full ' src={`http://localhost:8080/public/${product?.productPictures[0]?.img}`} alt="" />
        <span className='w-10 h-10 rounded-full absolute top-5 right-5 bg-primary flex justify-center items-center'> <BiHeart className="text-2xl " /></span>
 
         <p className='text-dark'>{product?.name}</p>

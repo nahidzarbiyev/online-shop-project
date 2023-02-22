@@ -58,7 +58,7 @@ const Products = () => {
   return (
     <div className="ml-56 p-5 ">
       <div className="flex justify-between items-center p-10">
-        <h1 className="uppercase text-sm font-bold ">Product</h1> <button onClick={()=>setToggle(!toggle)}    className=" px-10 py-2 bg-dark rounded-lg text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary">Add new product</button>
+        <h1 className="uppercase text-sm font-bold ">Product</h1> <button onClick={()=>setToggle(!toggle)}    className=" px-10 py-2 bg-dark rounded-3xl text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary">Add new product</button>
       </div>
       <div className={
           toggle

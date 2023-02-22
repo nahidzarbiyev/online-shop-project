@@ -100,7 +100,11 @@ const Asidebar = () => {
             © 2023 Nike, Inc. All Rights Reserved
           </span>
           <button
-            onClick={() => dispatch(signout(token))}
+            onClick={() => {
+              
+              dispatch(signout(token))
+              navigate("/sign-in");
+            }}
             className="uppercase px-10 flex items-center justify-center gap-2 py-2 bg-gray-800 text-white text-sm font-bold"
           >
             Log Out <FiLogOut />

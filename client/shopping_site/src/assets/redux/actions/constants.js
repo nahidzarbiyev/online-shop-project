@@ -18,3 +18,14 @@ export const categoryConstants = {
 export const productConstants = {
   GET_PRODUCT_BY_SLUG:'GET_PRODUCT_BY_SLUG'
 }
+
+
+export const authConstants = {
+  LOGIN_REQUEST:'LOGIN_REQUEST',
+  LOGIN_FAILURE:'LOGIN_FAILURE',
+  LOGIN_SUCCESS:'LOGIN_SUCCESS',
+  LOGOUT_SUCCESS:'LOGOUT_SUCCESS',
+  LOGOUT_FAILURE:'LOGOUT_FAILURE',
+  LOGOUT_REQUEST:'LOGOUT_REQUEST'
+
+}

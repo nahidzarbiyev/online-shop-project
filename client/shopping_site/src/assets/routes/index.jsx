@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import SaleCarusel from '../components/saleCarusel'
 import Footer from '../layouts/footer'
@@ -13,8 +14,18 @@ import Signup from '../pages/register/signup'
 import Size from '../pages/size'
 import StoreMap from '../pages/storeMap'
 import Yardim from '../pages/Yardim'
+import { userLoggedin } from '../redux/actions/auth.actions'
 
 const Routing = () => {
+  const dispatch = useDispatch()
+  const auth = useSelector(state=>state.auth)
+  useEffect(() => {
+    if (!auth.authenticate) {
+      dispatch(userLoggedin())
+    }
+ 
+  }, [auth.authenticate])
+  
   return (
   <>
   <HelpHeader/>

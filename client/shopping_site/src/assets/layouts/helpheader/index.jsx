@@ -53,8 +53,8 @@ const HelpHeader = () => {
        
 
           <span>|</span>{" "}
-          <Link className="hover:opacity-70">Join us</Link> <span>|</span>{" "}
-          <Link className="hover:opacity-70">Sign In</Link>
+          <Link to={'/join-us'} className="hover:opacity-70">Join us</Link> <span>|</span>{" "}
+          <Link to={'/sign-in'} className="hover:opacity-70">Sign In</Link>
         </div>
       </div>
     </div>

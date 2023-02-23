@@ -112,13 +112,15 @@ const Categories = () => {
       _id: elem.value,
     }));
     const idsArray = expandedIdsArray.concat(checkedIdsArray);
-    dispatch(deleteCategories(idsArray))
-    .then(res=>{
-      if (res) {
-        dispatch(getAllCategory())
-        setDeleteToggle(!deleteToggle)
-      }
-    })
+
+    if (checkedArr.length > 0) {
+      dispatch(deleteCategories(checkedIdsArray)).then((res) => {
+        if (res) {
+          dispatch(getAllCategory());
+          setDeleteToggle(!deleteToggle);
+        }
+      });
+    }
   };
 
   const handleCategoryInput = (key, value, index, type) => {
@@ -299,13 +301,11 @@ const Categories = () => {
                 form.append("_id", elem.value);
                 form.append("name", elem.name);
                 form.append("parentId", elem.parentId ? elem.parentId : "");
-                form.append("type", elem.type);
               });
               checkedArr.forEach((elem, index) => {
                 form.append("_id", elem.value);
                 form.append("name", elem.name);
                 form.append("parentId", elem.parentId ? elem.parentId : "");
-                form.append("type", elem.type);
               });
               dispatch(updateCategories(form)).then((res) => {
                 if (res) {
@@ -371,12 +371,7 @@ const Categories = () => {
                               );
                             })}
                           </Field>
-                          <select name="" id="" className="outline-none">
-                            <option value="">Select Type</option>
-                            <option value="Parent">Parent</option>
-                            <option value="Product">Product</option>
-                            <option value="Page">Page</option>
-                          </select>
+                         
                         </div>
                       </>
                     );
@@ -435,12 +430,7 @@ const Categories = () => {
                               );
                             })}
                           </Field>
-                          <select name="" id="" className="outline-none">
-                            <option value="">Select Type</option>
-                            <option value="Parent">Parent</option>
-                            <option value="Product">Product</option>
-                            <option value="Page">Page</option>
-                          </select>
+                        
                         </div>
                       </>
                     );
@@ -510,8 +500,9 @@ const Categories = () => {
             >
               Yes
             </button>
-            <button className="text-dark bg-primary px-10 py-2 transition-all duration-300 hover:opacity-70 rounded-3xl outline-none"
-            onClick={()=>setDeleteToggle(!deleteToggle)}
+            <button
+              className="text-dark bg-primary px-10 py-2 transition-all duration-300 hover:opacity-70 rounded-3xl outline-none"
+              onClick={() => setDeleteToggle(!deleteToggle)}
             >
               No
             </button>

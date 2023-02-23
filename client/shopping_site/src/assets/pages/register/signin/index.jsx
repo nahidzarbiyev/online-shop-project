@@ -19,19 +19,16 @@ const [password, setPassword] = useState('')
 
 <form action="" className="flex flex-col gap-4 p-4 w-[300px] items-center justify-center" onSubmit={userLogin}>
      <img src={Logo} width={'50px'} alt="" />
-    <p className='font-Anton uppercase text-center text-2xl'>NIKE ÜYESİ OL</p>
-    <span className='text-gray-500 text-xs text-center'>Nike Üye profilini oluşturarak Nike'ın en iyi ürünlerine ilk erişen sen ol, topluluğa eriş ve ilham al.</span>
-     <input type="email" value={email} placeholder='First Name' onChange={(e)=>setEmail(e.target.value)} className="border placeholder:text-sm  outline-none p-2 w-80 rounded"/>
-     <input type="email" value={email} placeholder='Last Name' onChange={(e)=>setEmail(e.target.value)} className="border placeholder:text-sm  outline-none p-2 w-80 rounded"/>
+    <p className='font-Anton uppercase text-center text-2xl'>NIKE'A DAİR HER ŞEY İÇİN HESABIN</p>
      <input type="email" value={email} placeholder='email' onChange={(e)=>setEmail(e.target.value)} className="border placeholder:text-sm  outline-none p-2 w-80 rounded"/>
      <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}  placeholder=" password" className="border placeholder:text-sm  outline-none p-2 w-80 rounded"/>
-    <span className='text-gray-500 text-xs text-center'>
-Hesap oluşturarak  Nike'ın Gizlilik Politikası'nı ve Kullanım Şartları'nı kabul etmiş olursun.</span>
+    <span className='text-gray-500 text-xs text-center'>Şifreni mi unutdun?</span>
+    <span className='text-gray-500 text-xs text-center'>Oturum açarak Nike'ın Gizlilik Politikası'nı ve Kullanım Şartları'nı kabul etmiş olursun.</span>
      <button type="submit" 
              className=" px-10 py-2 w-80 bg-dark rounded text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary"
      
      >submit</button>
-    <span className='text-gray-500 text-xs text-end'>Zaten üye misin? <Link  className='text-dark underline' to={'/sign-in'}>Oturum Aç.</Link></span>
+    <span className='text-gray-500 text-xs text-end'>Üye değil misin? <Link  className='text-dark underline' to={'/sign-up'}>Bize Katıl.</Link></span>
 
    </form>
 

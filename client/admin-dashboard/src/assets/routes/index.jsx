@@ -6,6 +6,7 @@ import Categories from "../pages/categories";
 import DashboardHome from "../pages/dashboard-home";
 import AdminDashboard from "../pages/home";
 import Orders from "../pages/orders";
+import ProductPage from "../pages/ProductPage";
 import Products from "../pages/products";
 import Register from "../pages/register";
 import Settings from "../pages/settings";
@@ -46,6 +47,7 @@ const Routing = () => {
         <Route path="/sign-in" exact element={<Signin />} />
 
         <Route path="/" exact element={<DashboardHome/>}/>
+        <Route path="/page" element={<ProductPage/>}/>
         <Route path="/orders" element={<Orders/>}/>
         <Route path="/products" element={<Products/>}/>
         <Route path="/categories" element={<Categories/>}/>

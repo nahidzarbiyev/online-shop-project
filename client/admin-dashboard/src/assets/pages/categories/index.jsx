@@ -65,6 +65,7 @@ const Categories = () => {
         value: category._id,
         name: category.name,
         parentId: category.parentId,
+        type:category.type
       });
       if (category.children.length > 0) {
         categoryList(category.children, options);
@@ -76,6 +77,7 @@ const Categories = () => {
   const updateCategory = () => {
     updateCheckedAndExpandedCategories();
     setUpdateCategorytoggle(!updateCategorytoggle);
+    console.log({expandedArr, checkedArr});
 
   };
 const updateCategoryForm = (e)=>{
@@ -97,6 +99,11 @@ checkedArr.forEach((elem, i) => {
 
 })
 dispatch(updateCategories(form))
+.then((res)=>{
+  if (res) {
+    dispatch(getAllCategory())
+  }
+})
 }
 
   const updateCheckedAndExpandedCategories = () => {
@@ -297,7 +304,7 @@ dispatch(updateCategories(form))
       >
         <div
           className={
-            "min-w-[400px] min-h-[450px] py-2 bg-dark flex scale-100 transition-all duration-300 rounded-xl visible flex-col gap-10 justify-center items-center fixed left-[43%] top-[20%] "
+            "min-w-[400px] min-h-[450px] py-2 bg-dark flex scale-100 transition-all duration-300 rounded-xl visible flex-col gap-10 justify-center items-center fixed left-[38%] top-[20%] "
           }
         >
           <CiCircleRemove
@@ -345,7 +352,8 @@ dispatch(updateCategories(form))
                   );
                 })}
               </select>
-              <select  className="p-2   border outline-none mx-2 w-56 border-blue-500">
+              <select  className="p-2   border outline-none mx-2 w-56 border-blue-500"
+              value={elem.type} onChange={(e) => handleCategoryInput('type', e.target.value, i, 'expanded')}>
                 <option value="">Select Type</option>
                 <option value="store">Store</option>
                 <option value="product">Product</option>
@@ -390,7 +398,8 @@ dispatch(updateCategories(form))
                   );
                 })}
               </select>
-              <select  className="p-2   border outline-none mx-2 w-56 border-blue-500">
+              <select  className="p-2   border outline-none mx-2 w-56 border-blue-500"
+              value={elem.type} onChange={(e) => handleCategoryInput('type', e.target.value, i, 'checked')}>
                 <option value="">Select Type</option>
                 <option value="store">Store</option>
                 <option value="product">Product</option>
@@ -402,7 +411,7 @@ dispatch(updateCategories(form))
           
         }
             <button type="submit" className="py-2 px-7 bg-primary text-dark uppercase m-4 rounded-3xl hover:opacity-70 text-sm font-bold ">
-              Submit
+              Save
             </button>
           </form>
         </div>

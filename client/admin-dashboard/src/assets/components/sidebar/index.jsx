@@ -64,6 +64,16 @@ const Asidebar = () => {
             </li>{" "}
             <li>
               <NavLink
+                to="/page"
+                className={({ isActive }) =>
+                isActive ? activeLink : normalLink
+              }              >
+                {" "}
+                <AiFillFileText className="" /> Page
+              </NavLink>
+            </li>{" "}
+            <li>
+              <NavLink
                 to="/products"
                 className={({ isActive }) =>
                 isActive ? activeLink : normalLink

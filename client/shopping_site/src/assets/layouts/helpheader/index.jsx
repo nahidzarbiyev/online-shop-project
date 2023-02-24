@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import Jordan from "../../images/png/584292c4a6515b1e0ad75aca.png";
 import Converse from "../../images/png/Converse-logo.png";
 import { FiLogOut } from "react-icons/fi";
+import { signout } from "../../redux/actions/auth.actions";
 
 const HelpHeader = () => {
+  const token = localStorage.getItem("token");
   const auth = useSelector((state) => state.auth);
-
   useEffect(() => {
   }, [auth.authenticate]);
-  
-  console.log(auth);
+  const dispatch = useDispatch()
+  const logout =()=>{
+  dispatch(signout(token))
+  }
+  console.log(token)
   const renderLoggedinMenu = () => {
     return (
       <div className="flex gap-2  text-dark text-xs   ">
@@ -95,7 +99,7 @@ const HelpHeader = () => {
                 <Link>Hesap ayarları</Link>
               </li>
               <li>
-               <button  className="flex gap-2 items-center">Oturumu Kapat <FiLogOut/></button>
+               <button  className="flex gap-2 items-center" onClick={()=>logout()}>Oturumu Kapat <FiLogOut/></button>
               </li>
             </ul>
           </div>

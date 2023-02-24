@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../images/png/Logo_NIKE.svg.png";
 import { login } from "../../../redux/actions/auth.actions";
 
 const Signin = () => {
 
   const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
+  const navigate = useNavigate()
 
-
+  useEffect(() => {
+    if (token) {
+      navigate('/')
+    }
+  
+  
+  }, [token])
+  
   const userLogin = (e) => {
     e.preventDefault();
     
   
     dispatch(login({email, password}))
+    
     setEmail('')
     setPassword('')
   };

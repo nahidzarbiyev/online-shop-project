@@ -7,9 +7,10 @@ import { BsBoxSeam } from "react-icons/bs";
 import { BiCategory } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { signout } from "../../redux/actions/auth.action";
+import { signout, userLoggedin } from "../../redux/actions/auth.action";
 const Asidebar = () => {
   const auth = useSelector((state) => state.auth);
+  console.log(auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -32,7 +33,10 @@ const Asidebar = () => {
           <div className="profile w-28 h-28  rounded-full bg-white"> </div>
           <p className="text-white text-sm uppercase font-bold">
             {" "}
-            Nahid Zarbiyev
+            {auth.authenticate
+            ? auth.user.fullName
+          :
+          null}
           </p>
         </div>
         <div>

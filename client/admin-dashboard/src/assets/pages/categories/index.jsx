@@ -76,6 +76,8 @@ const Categories = () => {
   const updateCategory = () => {
     updateCheckedAndExpandedCategories();
     setUpdateCategorytoggle(!updateCategorytoggle);
+
+    console.log({ checked, expanded });
   };
 
   const updateCheckedAndExpandedCategories = () => {
@@ -288,162 +290,102 @@ const Categories = () => {
             <img src={Logo} width={"70px"} alt="" />
             <p>Update Category</p>
           </div>
-
-          <Formik
-            initialValues={{
-              name: "",
-              parentId: "",
-            }}
-            validationSchema={SignupSchema}
-            onSubmit={(values, { resetForm }) => {
-              const form = new FormData();
-              expandedArr.forEach((elem, index) => {
-                form.append("_id", elem.value);
-                form.append("name", elem.name);
-                form.append("parentId", elem.parentId ? elem.parentId : "");
-              });
-              checkedArr.forEach((elem, index) => {
-                form.append("_id", elem.value);
-                form.append("name", elem.name);
-                form.append("parentId", elem.parentId ? elem.parentId : "");
-              });
-              dispatch(updateCategories(form)).then((res) => {
-                if (res) {
-                  dispatch(getAllCategory());
-                }
-              });
-              console.log(values);
-              resetForm({ values: "" });
-            }}
-          >
-            {({ errors, touched }) => (
-              <Form className="flex flex-col  gap-3 w-full  bg-dark p-5 py-2 justify-center items-center">
-                <h6 className="text-primary text-sm uppercase font-bold">
-                  Expanded Categories
-                </h6>
-                {expandedArr.length > 0 &&
-                  expandedArr.map((el, index) => {
-                    return (
-                      <>
-                        <div className="flex gap-3">
-                          <Field
-                            name="name"
-                            value={el.name}
-                            onKeyUp={(e) =>
-                              handleCategoryInput(
-                                "name",
-                                e.target.value,
-                                index,
-                                "expanded"
-                              )
-                            }
-                            placeholder="category Name"
-                            className="p-2 outline none border w-full border-blue-500"
-                          />
-                          {errors.name && touched.name ? (
-                            <div>{errors.name}</div>
-                          ) : null}
-                          <Field
-                            className="p-2 outline none border w-full border-blue-500"
-                            component="select"
-                            id="parentId"
-                            value={el.parentId}
-                            onKeyUp={(e) =>
-                              handleCategoryInput(
-                                "parentId",
-                                e.target.value,
-                                index,
-                                "expanded"
-                              )
-                            }
-                            name="parentId"
-                            multiple={false}
-                          >
-                            {categoryList(category.categories).map((option) => {
-                              return (
-                                <option
-                                  key={option.value}
-                                  value={option.value}
-                                  selected={el.name}
-                                >
-                                  {option.name}
-                                </option>
-                              );
-                            })}
-                          </Field>
-                         
-                        </div>
-                      </>
-                    );
-                  })}
-
-                <h6 className="text-primary text-sm uppercase font-bold">
-                  Checked Categories
-                </h6>
-                {checkedArr.length > 0 &&
-                  checkedArr.map((el, index) => {
-                    return (
-                      <>
-                        <div className="flex gap-3">
-                          <Field
-                            name="name"
-                            value={el.name}
-                            onKeyUp={(e) =>
-                              handleCategoryInput(
-                                "name",
-                                e.target.value,
-                                index,
-                                "checked"
-                              )
-                            }
-                            placeholder="category Name"
-                            className="p-2 outline none border w-full border-blue-500"
-                          />
-                          {errors.name && touched.name ? (
-                            <div>{errors.name}</div>
-                          ) : null}
-                          <Field
-                            className="p-2 outline none border w-full border-blue-500"
-                            component="select"
-                            id="parentId"
-                            value={el.parentId}
-                            onKeyUp={(e) =>
-                              handleCategoryInput(
-                                "parentId",
-                                e.target.value,
-                                index,
-                                "checked"
-                              )
-                            }
-                            name="parentId"
-                            multiple={false}
-                          >
-                            {categoryList(category.categories).map((option) => {
-                              return (
-                                <option
-                                  key={option.value}
-                                  value={option.value}
-                                  selected={el.name}
-                                >
-                                  {option.name}
-                                </option>
-                              );
-                            })}
-                          </Field>
-                        
-                        </div>
-                      </>
-                    );
-                  })}
-                <button
-                  type="submit"
-                  className="py-2 px-6 bg-primary rounded-3xl my-4"
-                >
-                  Submit
-                </button>
-              </Form>
-            )}
-          </Formik>
+          <form action="" className="flex flex-col gap-2 p-2 items-center">
+            <h2 className="text-primary text-xl uppercase font-bold m-2">
+              Expanded
+            </h2>
+  
+        {
+          expandedArr.length > 0 &&
+          expandedArr.map((elem, i)=>{
+            return (
+              <div key={i} className="flex gap-2 ">
+                    <input 
+                type="text"
+                placeholder="Category Name"
+                value={elem.name}
+                className="p-2 mx-2  border w-56 outline-none border-blue-500"
+                onChange={(e) => handleCategoryInput('name', e.target.value, i, 'expanded')}
+              />
+              <select 
+                className="p-2   border w-56 mx-2 outline-none border-blue-500"
+       
+                id="parentId"
+                value={elem.parentId}
+                name="parentId"
+                onChange={(e) =>  handleCategoryInput('parentId', e.target.value, i, 'expanded')}
+              >
+                <option value="" selected>
+                  select a category
+                </option>
+                {categoryList(category.categories).map((option) => {
+                  return (
+                    <option key={option.value} value={option.value}>
+                      {option.name}
+                    </option>
+                  );
+                })}
+              </select>
+              <select  className="p-2   border outline-none mx-2 w-56 border-blue-500">
+                <option value="">Select Type</option>
+                <option value="store">Store</option>
+                <option value="product">Product</option>
+                <option value="page">Page</option>
+              </select>
+              </div>
+            )
+          })
+          
+        }
+           <h2 className="text-primary text-xl uppercase font-bold m-2">
+              Checked
+            </h2>
+    {
+          checkedArr.length > 0 &&
+          checkedArr.map((elem, i)=>{
+            return (
+              <div key={i} className="flex gap-2 ">
+                    <input 
+                type="text"
+                placeholder="Category Name"
+                value={elem.name}
+                className="p-2 mx-2  border w-56 outline-none border-blue-500"
+                onChange={(e) => handleCategoryInput('name', e.target.value, i, 'checked')}
+              />
+              <select 
+                className="p-2   border w-56 mx-2 outline-none border-blue-500"
+       
+                id="parentId"
+                value={elem.parentId}
+                name="parentId"
+                onChange={(e) =>  handleCategoryInput('parentId', e.target.value, i, 'checked')}
+              >
+                <option value="" selected>
+                  select a category
+                </option>
+                {categoryList(category.categories).map((option) => {
+                  return (
+                    <option key={option.value} value={option.value}>
+                      {option.name}
+                    </option>
+                  );
+                })}
+              </select>
+              <select  className="p-2   border outline-none mx-2 w-56 border-blue-500">
+                <option value="">Select Type</option>
+                <option value="store">Store</option>
+                <option value="product">Product</option>
+                <option value="page">Page</option>
+              </select>
+              </div>
+            )
+          })
+          
+        }
+            <button className="py-2 px-7 bg-primary text-dark uppercase m-4 rounded-3xl hover:opacity-70 text-sm font-bold ">
+              Submit
+            </button>
+          </form>
         </div>
       </div>
       <div

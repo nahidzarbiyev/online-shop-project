@@ -7,27 +7,59 @@ import { useSelector } from "react-redux";
 const ProductPage = () => {
   const [toggle, setToggle] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [categoryId, setCategoryId] = useState('')
-  const [title, setTitle] = useState('')
-  const [desc, setDesc] = useState('')
-  const [ panners, setBanners] = useState([])
-  const [ product, setProduct] = useState([])
+  const [categoryId, setCategoryId] = useState("");
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [banners, setBanners] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [type, setType] = useState("");
   const category = useSelector((state) => state.category);
   const handleEdit = () => {
     setToggle(!toggle);
   };
+  const handleBannersImg = (e) => {
+    console.log(e);
+    setBanners([...banners, e.target.files[0]]);
+  };
 
-  const handleBannersImg = (e)=>{
+  const handleProductsImg = (e) => {
+    console.log(e);
+    setProduct([...product, e.target.files[0]]);
+  };
 
-  }
-  
-  const handleProductsImg = (e)=>{
+  const submitPage = (e) => {
+    e.preventDefault();
 
-}
+    if (title === '') {
+      alert('title is required')
+      setToggle(!toggle)
+    }
+
+    const form = new FormData();
+    form.append("title", title);
+    form.append("description", desc);
+    form.append("category", categoryId);
+    form.append("type", type);
+    banners.forEach((banner, i)=>{
+      form.append('banners', banner)
+    })
+    product.forEach((prod, i)=>{
+      form.append('products', prod)
+    })
+    console.log(title, desc, categoryId, type, banners, product );
+  };
+
   useEffect(() => {
     setCategories(linearCategories(category.categories));
-  }, []);
+  }, [category]);
 
+  const onCategoryChange = (e) => {
+    const category = categories.find(category => category._id == e.target.value);
+
+    console.log(categoryId);
+    setCategoryId(e.target.value);
+    setType(category.type);
+  };
   return (
     <div className="ml-56 p-5 ">
       <button
@@ -54,38 +86,74 @@ const ProductPage = () => {
             onClick={() => handleEdit()}
           />
 
-
           <div className="flex text-primary items-center w-full justify-around ">
             <img src={Logo} width={"70px"} alt="" />
             <p>Create New Page</p>
           </div>
-          <select  className="p-2   border outline-none  w-[90%] mx-auto border-blue-500"
-              value={categoryId} onChange={(e) => setCategoryId( e.target.value)}>
-                <option value="">Select Category</option>
-               {categories?.map((elem)=>
-               <option key={elem._id}>{elem.name}</option>)}
-              </select>
-          <input
-            type="text"
-            value={title}
-            onChange={(e)=>setTitle(e.target.value)}
-            placeholder="Page Title"
-            className="p-2  border w-[90%] mx-auto outline-none border-blue-500"
-          />
-           <input
-            type="text"
-            value={desc}
-            onChange={(e)=>setDesc(e.target.value)}
-            placeholder="Page Title"
-            className="p-2  border w-[90%] mx-auto outline-none border-blue-500"
-          />
-          <input type="file" name="banners"
-          className="p-2  border w-[90%] mx-auto outline-none border-blue-500 bg-white"
-          onChange={(e)=>handleBannersImg()} />
-           <input type="file" name="banners"
-          className="p-2  border w-[90%] mx-auto outline-none border-blue-500 bg-white"
+          <form action="" onSubmit={(e) => submitPage(e)}>
+            <select
+              className="p-2   border outline-none  w-[90%] mx-2 border-blue-500"
+              value={categoryId}
+              onChange={(e) => onCategoryChange(e)}
+            >
+              <option value="">Select Category</option>
+              {categories?.map((elem) => (
+                <option key={elem._id} value={elem._id}>{elem.name}</option>
+              ))}
+            </select>
+       
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Page Title"
+              className="p-2  border w-[90%] mx-2 outline-none border-blue-500"
+            />
+            <input
+              type="text"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+              placeholder="Page Title"
+              className="p-2  border w-[90%] mx-2  outline-none border-blue-500"
+            />
+            {banners.length > 0
+              ? banners.map((el, i) => {
+                  <p key={i} className="text-primary uppercase text-xs">
+                    {el.name}
+                  </p>;
+                })
+              : null}
+            <input
+              type="file"
+              multiple={true}
+              name="banners"
+              className="p-2  border w-[90%] mx-2 outline-none border-blue-500 bg-white"
+              onChange={(e) => handleBannersImg(e)}
+            />
 
-          onChange={(e)=>handleProductsImg()} />
+            {product.length > 0
+              ? product.map((el, i) => {
+                  <p key={i} className="text-primary uppercase text-xs">
+                    {el.name}
+                  </p>;
+                })
+              : null}
+            <input
+              type="file"
+              multiple={true}
+
+              name="banners"
+              className="p-2  border w-[90%] mx-2 outline-none border-blue-500 bg-white"
+              onChange={(e) => handleProductsImg(e)}
+            />
+
+            <button
+              type="submit"
+              className="py-2 px-7 bg-primary text-dark uppercase m-4 rounded-3xl hover:opacity-70 text-sm font-bold "
+            >
+              Save
+            </button>
+          </form>
         </div>
       </div>
     </div>

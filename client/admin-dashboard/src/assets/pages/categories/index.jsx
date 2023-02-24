@@ -77,8 +77,27 @@ const Categories = () => {
     updateCheckedAndExpandedCategories();
     setUpdateCategorytoggle(!updateCategorytoggle);
 
-    console.log({ checked, expanded });
   };
+const updateCategoryForm = (e)=>{
+e.preventDefault()
+setUpdateCategorytoggle(!updateCategorytoggle);
+const form = new FormData()
+expandedArr.forEach((elem, i) => {
+  form.append('_id', elem.value)
+  form.append('name', elem.name)
+  form.append('parentId', elem.parentId ? elem.parentId : '')
+  form.append('type', elem.type)
+})
+
+checkedArr.forEach((elem, i) => {
+  form.append('_id', elem.value)
+  form.append('name', elem.name)
+  form.append('parentId', elem.parentId ? elem.parentId : '')
+  form.append('type', elem.type)
+
+})
+dispatch(updateCategories(form))
+}
 
   const updateCheckedAndExpandedCategories = () => {
     const categories = categoryList(category.categories);
@@ -290,7 +309,7 @@ const Categories = () => {
             <img src={Logo} width={"70px"} alt="" />
             <p>Update Category</p>
           </div>
-          <form action="" className="flex flex-col gap-2 p-2 items-center">
+          <form action="" onSubmit={(e)=>updateCategoryForm(e)} className="flex flex-col gap-2 p-2 items-center">
             <h2 className="text-primary text-xl uppercase font-bold m-2">
               Expanded
             </h2>
@@ -382,7 +401,7 @@ const Categories = () => {
           })
           
         }
-            <button className="py-2 px-7 bg-primary text-dark uppercase m-4 rounded-3xl hover:opacity-70 text-sm font-bold ">
+            <button type="submit" className="py-2 px-7 bg-primary text-dark uppercase m-4 rounded-3xl hover:opacity-70 text-sm font-bold ">
               Submit
             </button>
           </form>

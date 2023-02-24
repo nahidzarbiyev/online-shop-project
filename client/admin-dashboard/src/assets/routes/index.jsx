@@ -27,9 +27,12 @@ const Routing = () => {
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   // token ? navigate("/") : navigate("/sign-in");
-  // }, []);
+  useEffect(() => {
+    if (!token) {
+    navigate("/sign-in") 
+      
+    }
+  }, [token]);
 
   return (
     <>

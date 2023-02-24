@@ -32,7 +32,8 @@ const pageSchema = new mongoose.Schema(
         type:mongoose.Schema.Types.ObjectId,
         ref:'Category',
         trim:true,
-        required:true
+        required:true,
+        unique:true
     },
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,

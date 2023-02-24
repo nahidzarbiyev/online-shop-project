@@ -1,15 +1,22 @@
 const express = require("express");
-const { createPage } = require("../../controller/admin/page");
-const { upload } = require("../../middleware");
+const { createPage, getPage } = require("../../controller/admin/page");
+const { upload, requireSignin, adminMiddleware } = require("../../middleware");
 const router = express.Router();
 
-router.post('/page/create',upload.fields([
+router.post(
+  "/page/create",
+  requireSignin,
+  adminMiddleware,
+  upload.fields([
     {
-        name:'banners', 
+      name: "banners",
     },
     {
-        name:'products'
-    }
-]), createPage )
+      name: "products",
+    },
+  ]),
+  createPage
+);
+router.get(`/page/:category/:type`, getPage);
 
 module.exports = router;

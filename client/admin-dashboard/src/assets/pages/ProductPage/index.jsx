@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Logo from "../../images/nike_PNG9.png";
 import { CiCircleRemove } from "react-icons/ci";
 import linearCategories from "../../helpers/linearCategories";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createPage } from "../../redux/actions/page.action";
 
 const ProductPage = () => {
   const [toggle, setToggle] = useState(false);
@@ -14,7 +15,10 @@ const ProductPage = () => {
   const [product, setProduct] = useState([]);
   const [type, setType] = useState("");
   const category = useSelector((state) => state.category);
+  const page = useSelector(state => state.page);
+  const dispatch = useDispatch()
   const handleEdit = () => {
+
     setToggle(!toggle);
   };
   const handleBannersImg = (e) => {
@@ -40,18 +44,33 @@ const ProductPage = () => {
     form.append("description", desc);
     form.append("category", categoryId);
     form.append("type", type);
-    banners.forEach((banner, i)=>{
+    banners?.forEach((banner, i)=>{
       form.append('banners', banner)
     })
-    product.forEach((prod, i)=>{
+    product?.forEach((prod, i)=>{
       form.append('products', prod)
     })
-    console.log(title, desc, categoryId, type, banners, product );
+ dispatch(createPage(form))
+
   };
 
   useEffect(() => {
     setCategories(linearCategories(category.categories));
   }, [category]);
+
+  useEffect(() => {
+    if (!page.loading) {
+      setToggle(false)
+      setBanners([])
+      setDesc('')
+      setProduct([])
+      setTitle('')
+      setCategoryId('')
+    }
+  console.log(page);
+
+  }, [page])
+  
 
   const onCategoryChange = (e) => {
     const category = categories.find(category => category._id == e.target.value);
@@ -62,7 +81,13 @@ const ProductPage = () => {
   };
   return (
     <div className="ml-56 p-5 ">
-      <button
+      {
+        page.loading
+        ?
+        <p>Creating Page</p>
+        :
+        <>
+         <button
         className=" px-10 py-2 bg-dark rounded-3xl text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary"
         onClick={() => handleEdit()}
       >
@@ -90,9 +115,9 @@ const ProductPage = () => {
             <img src={Logo} width={"70px"} alt="" />
             <p>Create New Page</p>
           </div>
-          <form action="" onSubmit={(e) => submitPage(e)}>
+          <form action="" onSubmit={(e) => submitPage(e)} className='flex flex-col gap-2 justify-center items-center'>
             <select
-              className="p-2   border outline-none  w-[90%] mx-2 border-blue-500"
+              className="p-2   border outline-none  w-[90%]  border-blue-500"
               value={categoryId}
               onChange={(e) => onCategoryChange(e)}
             >
@@ -107,14 +132,14 @@ const ProductPage = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Page Title"
-              className="p-2  border w-[90%] mx-2 outline-none border-blue-500"
+              className="p-2  border w-[90%] mx-5 outline-none border-blue-500"
             />
             <input
               type="text"
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
-              placeholder="Page Title"
-              className="p-2  border w-[90%] mx-2  outline-none border-blue-500"
+              placeholder="Page Description"
+              className="p-2  border w-[90%] mx-5 outline-none border-blue-500"
             />
             {banners.length > 0
               ? banners.map((el, i) => {
@@ -127,13 +152,13 @@ const ProductPage = () => {
               type="file"
               multiple={true}
               name="banners"
-              className="p-2  border w-[90%] mx-2 outline-none border-blue-500 bg-white"
+              className="p-2  border w-[90%] mx-5 outline-none border-blue-500 bg-white"
               onChange={(e) => handleBannersImg(e)}
             />
 
             {product.length > 0
               ? product.map((el, i) => {
-                  <p key={i} className="text-primary uppercase text-xs">
+                  <p key={i} className="text-primary bg-white uppercase text-xs">
                     {el.name}
                   </p>;
                 })
@@ -143,7 +168,7 @@ const ProductPage = () => {
               multiple={true}
 
               name="banners"
-              className="p-2  border w-[90%] mx-2 outline-none border-blue-500 bg-white"
+              className="p-2  border w-[90%] mx-5 outline-none border-blue-500 bg-white"
               onChange={(e) => handleProductsImg(e)}
             />
 
@@ -156,6 +181,9 @@ const ProductPage = () => {
           </form>
         </div>
       </div>
+        </>
+      }
+     
     </div>
   );
 };

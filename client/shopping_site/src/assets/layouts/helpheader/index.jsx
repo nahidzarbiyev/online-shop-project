@@ -15,7 +15,6 @@ const HelpHeader = () => {
   const logout =()=>{
   dispatch(signout(token))
   }
-  console.log(token)
   const renderLoggedinMenu = () => {
     return (
       <div className="flex gap-2  text-dark text-xs   ">

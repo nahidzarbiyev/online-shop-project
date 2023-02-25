@@ -4,6 +4,6 @@ const { requireSignin, adminMiddleware } = require("../../middleware");
 const router = express.Router();
 
 
-router.post("/initialdata",requireSignin,adminMiddleware, initialdata);
+router.post("/initialdata",requireSignin, initialdata);
 
 module.exports = router;

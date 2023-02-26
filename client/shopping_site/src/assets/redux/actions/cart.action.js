@@ -1,8 +1,8 @@
-import axios from "../helpers/axios";
+import axios from "../../helpers/axios";
 import { cartConstants } from "./constants";
 import store from "../store";
 
-const getCartItems = () => {
+export const getCartItems = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: cartConstants.ADD_TO_CART_REQUEST });
@@ -29,9 +29,7 @@ export const addToCart = (product, newQty = 1) => {
       cart: { cartItems },
       auth,
     } = store.getState();
-    //console.log('action::products', products);
-    //const product = action.payload.product;
-    //const products = state.products;
+
     const qty = cartItems[product._id]
       ? parseInt(cartItems[product._id].qty + newQty)
       : 1;
@@ -136,4 +134,3 @@ export const updateCart = () => {
   };
 };
 
-export { getCartItems };

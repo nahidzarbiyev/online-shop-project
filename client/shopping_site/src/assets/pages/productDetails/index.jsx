@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProductDetailsById } from "../../redux/actions/product.action";
 import { BiHeart } from "react-icons/bi";
 import { uid } from "uid";
 import { Collapse } from "antd";
+import { addToCart } from "../../redux/actions/cart.action";
 const { Panel } = Collapse;
 import Spinns from "../../components/spins";
 import ProductStore from "../productsPage/productStore";
 const ProductDetailPage = () => {
+
+const navigate = useNavigate()
+
+const [size, setsize] = useState([])
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product = useSelector((state) => state.product);
@@ -20,6 +25,29 @@ const ProductDetailPage = () => {
     };
     dispatch(getProductDetailsById(payload));
   }, [productId]);
+
+
+const handleBasket=()=>{
+  const {_id, name, price,size, color} = product?.productDetails
+  const img = product?.productDetails?.productPictures?.[0].img
+
+  dispatch(addToCart({_id, name, price, size, color, img}))
+  navigate('/basket')
+}
+const handleFavorite = ()=>{
+
+}
+
+// const handleSize = ()=>{
+//   const findSize = size.find((el)=>el === e.target.value)
+//   if (!findSize) {
+//     setsize([...size, findSize])
+//   }
+//   else{
+//     setsize(size.filter((el)=>el !== e.target.value))
+//   }
+//   console.log(size)
+// }
 
   return (
     <>
@@ -65,7 +93,10 @@ const ProductDetailPage = () => {
                         .split(",")
                         .map((el) => {
                           return (
-                            <span className="flex w-full py-2 hover:border-dark transition-all duration-300 cursor-pointer  border justify-center items-center border-secondary">
+                            <span className="flex w-full py-2 hover:border-dark transition-all duration-300 cursor-pointer  border justify-center items-center border-secondary"
+                            onClick={(e)=>setsize(e)
+                            }
+                            >
                               {el}
                             </span>
                           );
@@ -79,10 +110,14 @@ const ProductDetailPage = () => {
                 )}
 
                 <div className="flex flex-col gap-3">
-                  <button className="w-full h-30 rounded-[30px] bg-dark hover:opacity-70 text-primary py-4">
+                  <button className="w-full h-30 rounded-[30px] bg-dark hover:opacity-70 text-primary py-4"
+                  onClick={()=>handleBasket()}
+                  >
                     Sepete Ekle
                   </button>
-                  <button className="w-full h-30 rounded-[30px] bg-white border border-primary hover:border-dark text-dark py-4 flex justify-center items-center gap-2">
+                  <button className="w-full h-30 rounded-[30px] bg-white border border-primary hover:border-dark text-dark py-4 flex justify-center items-center gap-2"
+                  onClick={()=>handleFavorite()}
+                  >
                     Favori
                     <BiHeart />
                   </button>

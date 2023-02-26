@@ -17,6 +17,8 @@ import StoreMap from "../pages/storeMap";
 import Yardim from "../pages/Yardim";
 import { userLoggedin } from "../redux/actions/auth.actions";
 import Favorites from "../pages/favorites";
+import BasketPage from "../pages/basketpage";
+import { updateCart } from "../redux/actions/cart.action";
 
 const Routing = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,13 @@ const Routing = () => {
     }
   }, [auth.authenticate]);
 
+
+  useEffect(() => {
+    
+  dispatch(updateCart())
+   
+  }, [])
+  
   return (
     <>
       <HelpHeader />
@@ -47,6 +56,7 @@ const Routing = () => {
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/favorites" element={<Favorites/>}/>
+        <Route path="/basket" element={<BasketPage/>}/>
       </Routes>
       <Footer />
     </>

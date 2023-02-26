@@ -2,17 +2,28 @@ import React, { useEffect, useState } from "react";
 import { BiHeart, BiTrash } from "react-icons/bi";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/actions/cart.action";
+import { useNavigate } from "react-router-dom";
+import { addToCart, getCartItems } from "../../redux/actions/cart.action";
 
 const BasketPage = () => {
     const basket = useSelector((state) => state.cart);
     const [cartItems, setcartItems] = useState(basket.cartItems);
     const [qty, setqty] = useState(cartItems.qty)
+    const auth = useSelector(state=>state.auth)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
   useEffect(() => {
     setcartItems(basket.cartItems);
   }, [basket.cartItems]);
 
+  useEffect(() => {
+    
+  if (auth.authenticate) {
+    dispatch(getCartItems())
+  }
+   
+  }, [auth.authenticate])
+  
   const incrementPrice = (_id,qty) => {
   const { name, price, color,img, size}=  cartItems[_id]
   dispatch(addToCart({_id, name, price, qty,color,img, size}, +1))
@@ -86,7 +97,9 @@ const BasketPage = () => {
         <div className="border-b-2 flex justify-between  border-b-primary">
           <span>Ara Toplam </span> <span>₺ 10000</span>
         </div>
-        <button className="w-full h-30 rounded-[30px] bg-dark border mt-5 hover:opacity-70 text-white py-4 flex justify-center items-center gap-2">
+        <button className="w-full h-30 rounded-[30px] bg-dark border mt-5 hover:opacity-70 text-white py-4 flex justify-center items-center gap-2"
+        onClick={()=>navigate('/checkout')}
+        >
           Üye Girişi Yaparak Ödeme
         </button>
       </div>

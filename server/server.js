@@ -13,11 +13,9 @@ const productRoutes = require('./routes/product')
 const cartRoutes = require('./routes/cart')
 const initialDataRoutes = require('./routes/admin/initialdata') 
 const pageRoutes = require('./routes/admin/page') 
-//environment variable or you can say constants
+const addressRoutes = require("./routes/adress");
 env.config();
 
-// mongodb connection
-//mongodb+srv://root:<password>@cluster0.8pl1w.mongodb.net/<dbname>?retryWrites=true&w=majority
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -37,6 +35,7 @@ app.use('/api', productRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', initialDataRoutes);
 app.use('/api', pageRoutes);
+app.use("/api", addressRoutes);
 app.use('/public',express.static(path.join(__dirname, 'uploads')))
 
 app.listen(process.env.PORT, () => {

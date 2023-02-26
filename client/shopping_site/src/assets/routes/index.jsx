@@ -19,6 +19,7 @@ import { userLoggedin } from "../redux/actions/auth.actions";
 import Favorites from "../pages/favorites";
 import BasketPage from "../pages/basketpage";
 import { updateCart } from "../redux/actions/cart.action";
+import CheckOutOrder from "../pages/CheckOutOrderPage";
 
 const Routing = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,10 @@ const Routing = () => {
       dispatch(userLoggedin());
     }
   }, [auth.authenticate]);
-
+  useEffect(() => {
+    console.log('update Cart');
+  dispatch(updateCart())
+  }, [auth.authenticate]);
 
   useEffect(() => {
     
@@ -57,6 +61,7 @@ const Routing = () => {
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/favorites" element={<Favorites/>}/>
         <Route path="/basket" element={<BasketPage/>}/>
+        <Route path="/checkout" element={<CheckOutOrder/>}/>
       </Routes>
       <Footer />
     </>

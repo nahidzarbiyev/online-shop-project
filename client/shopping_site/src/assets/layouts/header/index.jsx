@@ -89,7 +89,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to={'/basket'}>
                 <CgShoppingBag className="text-2xl" />
               </Link>
             </li>

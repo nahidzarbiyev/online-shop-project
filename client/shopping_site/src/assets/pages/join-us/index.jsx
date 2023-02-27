@@ -27,7 +27,7 @@ const Joinus = () => {
           </div>
         </div>
       </div>
-      {/* <BannerVideo /> */}
+      <BannerVideo />
       <h1 className="text-dark text-center text-[32px]">Üyeliğin en iyileri</h1>
       <div className="w-full flex gap-4">
         <div className="relative">

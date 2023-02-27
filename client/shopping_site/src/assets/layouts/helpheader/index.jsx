@@ -5,6 +5,7 @@ import Jordan from "../../images/png/584292c4a6515b1e0ad75aca.png";
 import Converse from "../../images/png/Converse-logo.png";
 import { FiLogOut } from "react-icons/fi";
 import { signout } from "../../redux/actions/auth.actions";
+import { useState } from "react";
 
 const HelpHeader = () => {
   const token = localStorage.getItem("token");
@@ -17,7 +18,7 @@ const HelpHeader = () => {
   }
   const renderLoggedinMenu = () => {
     return (
-      <div className="flex gap-2  text-dark text-xs   ">
+      <div className="lg:flex gap-2 hidden  text-dark text-xs   ">
         <Link to={"/retail"} className="hover:opacity-70">
           Find a Store
         </Link>{" "}
@@ -89,7 +90,7 @@ const HelpHeader = () => {
                 <Link>Favoriler </Link>
               </li>
               <li>
-                <Link to={"/size"}>Gelen Kutusu</Link>
+                <Link to={""}>Gelen Kutusu</Link>
               </li>
               <li>
                 <Link>Deneyimler</Link>
@@ -169,7 +170,8 @@ const HelpHeader = () => {
   };
 
   return (
-    <div className=" bg-primary  p-2 ">
+<>
+<div className=" bg-primary hidden lg:block p-2 ">
       <div className="max-w-[1800px] m-auto font-Roboto flex relative justify-between items-center">
         <div className="flex gap-2 items-center">
           <img src={Jordan} width={"22px"} alt="" />
@@ -178,6 +180,8 @@ const HelpHeader = () => {
         {auth.authenticate ? renderLoggedinMenu() : renderNonLoggedinMenu()}
       </div>
     </div>
+
+</>
   );
 };
 

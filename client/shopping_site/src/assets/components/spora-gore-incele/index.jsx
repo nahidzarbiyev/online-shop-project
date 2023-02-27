@@ -12,10 +12,13 @@ import SporImg7 from '../../images/spora-gore-incele/resmi-nike-sitesi (14).jpg'
 import SporImg8 from '../../images/spora-gore-incele/resmi-nike-sitesi (15).jpg'
 const SporaGoreKesfet = () => {
   const settings = {
-    className: "center w-full border-transparent max-w-[93.5vw] ml-[3.25rem] overflow-x-hidden ",
+    className: "center w-full border-transparent max-w-[93.5vw] mx-auto overflow-x-hidden ",
     centerMode: true,
     infinite: true,
+    autoplay:true,
     slidesToShow: 3,
+    autoplay:true,
+
     speed: 500,
     arrows: false,
     focusOnSelect: true,
@@ -25,36 +28,36 @@ const SporaGoreKesfet = () => {
       <p className="text-dark text-2xl pb-5 px-[3.1rem] ">Spora Göre İncele</p>
 
       <Slider {...settings}>
-    <div>
+    <div className="mx-5">
         <img src={SporImg1} alt="" width={'560px'}/>
         <p className="pt-10 text-dark text-xl">Koşu</p>
     </div>
-    <div>
+    <div className="mx-5">
         <img src={SporImg2} alt=""  width={'560px'} />
           <p className="pt-10 text-dark text-xl">Futbol</p>
     </div>
-    <div>
+    <div className="mx-5">
 
         <img src={SporImg3} alt=""  width={'560px'}/>
           <p className="pt-10 text-dark text-xl">Basketbol</p>
     </div>
-    <div>
+    <div className="mx-5">
         <img src={SporImg4} alt=""  width={'560px'} />
           <p className="pt-10 text-dark text-xl">Antrenman</p>
     </div>
-    <div>
+    <div className="mx-5">
         <img src={SporImg5} alt=""  width={'560px'}/>
           <p className="pt-10 text-dark text-xl">Tenis</p>
     </div>
-    <div>
+    <div className="mx-5">
         <img src={SporImg6} alt=""  width={'560px'} />
           <p className="pt-10 text-dark text-xl">Kaykay</p>
     </div>
-    <div>
+    <div className="mx-5">
         <img src={SporImg7} alt=""  width={'560px'} />
           <p className="pt-10 text-dark text-xl">Yoga</p>
     </div>
-    <div>
+    <div className="mx-5">
         <img src={SporImg8} alt=""  width={'560px'} />
           <p className="pt-10 text-dark text-xl">Dans</p>
     </div>

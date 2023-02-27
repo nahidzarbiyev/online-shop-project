@@ -34,7 +34,15 @@
   .navbar > ul > li > ul> li> a{
     @apply font-bold text-dark py-6 text-[16px] text-center;
   }
-
+.sidebar> ul > li >ul >li {
+@apply hidden
+}
+.sidebar> ul > li >ul >li >a {
+@apply hidden
+}
+.sidebar> ul >li  {
+@apply  my-2
+}
 * {
   font-family: "Roboto";
 }

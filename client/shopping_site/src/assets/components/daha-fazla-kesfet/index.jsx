@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const DahaFazlaKesfet = () => {
   const settings = {
     className:'-mx-2 w-full border-transparent max-w-[93.5vw] overflow-x-hidden ',
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -45,19 +45,19 @@ const DahaFazlaKesfet = () => {
       <Slider {...settings}>
         <div className="mx-1 relative">
           <img src={CategoryImg1}  alt="" />
-          <div className="absolute flex gap-2 z-30 bottom-10 left-12">
-    <Link className="px-6 py-2 bg-white hover:bg-secondary text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-secondary bg-white text-dark items-center rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
+          <div className="absolute md:flex-row flex-col items-start flex gap-2 z-30 bottom-10 left-12">
+    <Link className="px-6 py-2  bg-white hover:bg-secondary text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-secondary bg-white text-dark items-center rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
           </div>
         </div>
         <div className="mx-1 relative">
           <img src={CategoryImg2} alt="" />
-          <div className="absolute flex gap-2 z-30 bottom-10 left-12">
+          <div className="absolute md:flex-row flex-col flex gap-2 items-start z-30 bottom-10 left-12">
     <Link className="px-6 py-2 bg-white hover:bg-secondary text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-secondary bg-white text-dark items-center rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
           </div>
         </div>
         <div className="mx-1 relative">
           <img src={CategoryImg3} alt="" />
-          <div className="absolute flex gap-2 z-30 bottom-10 left-12">
+          <div className="absolute md:flex-row flex-col items-start  flex gap-2 z-30 bottom-10 left-12">
     <Link className="px-6 py-2 hover:bg-secondary bg-white text-dark rounded-3xl"> Kadın </Link> <Link className="px-6 py-2 hover:bg-secondary items-center bg-white text-dark rounded-3xl flex gap-2" ><TfiEye/> Stili İncele</Link>
           </div>
         </div>

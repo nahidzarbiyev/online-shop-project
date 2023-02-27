@@ -27,7 +27,7 @@ const ProductStore = () => {
        <Spinns/>
        :
        <>
-       <div className='grid grid-cols-3 max-w-[1700px] w-full mx-auto p-10 gap-5'>
+       <div className='grid grid-cols-1 md:grid-cols-3 mx-auto max-w-[1700px] w-full lg:flex-nowrap flex-wrap p-10 gap-5'>
         {
          products?.products?.map((product)=>{
            return (

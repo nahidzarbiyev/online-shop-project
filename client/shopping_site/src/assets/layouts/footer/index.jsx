@@ -16,9 +16,9 @@ axios.get
   return (
 
 <div className='w-full  min-h-[300px]  bg-dark'>
-<div className='max-w-[1400px] mx-auto flex justify-between items-start  pt-12 text-white'>
+<div className='max-w-[1400px] mx-auto flex justify-between items-start  py-10 text-white'>
 
-<ul className='flex justify-between gap-28'>
+<ul className='grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 mx-auto gap-x-16 gap-y-16'>
   <li>
     <ul className='flex flex-col gap-5 text-xs uppercase  font-Anton'>
       <li><Link className='text-xs uppercase r font-Anton'>Mağaza Bul</Link></li>
@@ -55,14 +55,17 @@ axios.get
       <li><Link>Promosyon Kodları</Link></li>
     </ul>
   </li>
-</ul>
-<ul className='flex gap-2'>
+  <li>
+  <ul className='flex gap-2'>
   <span className='flex w-8  h-8 text-xl text-dark bg-secondary rounded-full items-center justify-center'><BsTwitter/></span>
   <span className='flex w-8  h-8 text-xl text-dark bg-secondary rounded-full items-center justify-center'><FaFacebookF/></span>
   <span className='flex w-8  h-8 text-xl text-dark bg-secondary rounded-full items-center justify-center'><TfiYoutube/></span>
   <span className='flex w-8  h-8 text-xl text-dark bg-secondary rounded-full items-center justify-center'><TiSocialInstagram/></span>
  
 </ul>
+  </li>
+</ul>
+
 </div>
 
 </div>

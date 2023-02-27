@@ -7,7 +7,7 @@ const Rehberlik = () => {
     <div className="max-w-[1800px]  py-20  mx-auto">
       <p className="text-dark text-2xl pb-5 ">Rehberlik ve Zindelik</p>
 
-      <div className="flex gap-3">
+      <div className="flex lg:flex-row flex-col gap-3">
         <div className="relative">
           <img src={Rehberimg1} alt="" />
           <div className="absolute bottom-12 left-12 flex flex-col gap-6 items-start justify-center">

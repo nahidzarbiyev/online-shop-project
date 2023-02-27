@@ -56,20 +56,20 @@ const handleFavorite = ()=>{
           <Spinns />
         ) : (
           <>
-            <div className="flex gap-4  justify-between">
-              <div className="flex max-w-[900px] flex-wrap gap-x-3 gap-y-3">
+            <div className="flex gap-4 lg:flex-row flex-col  justify-between">
+              <div className="flex lg:max-w-[900px]  w-full mx-auto flex-wrap gap-x-3 gap-y-3">
                 {product?.productDetails?.productPictures?.map((img) => {
                   return (
                     <img
                       src={`http://localhost:8080/public/${img.img}`}
                       alt=""
-                      className="max-w-[400px]"
+                      className="lg:max-w-[400px] w-full mx-auto "
                     />
                   );
                 })}
               </div>
-              <div className="flex flex-col gap-3 w-full max-w-[400px]">
-                <p className="text-3xl font-normal text-dark tracking-wide ">
+              <div className="flex flex-col gap-3 w-full lg:max-w-[400px]">
+                <p className="text-3xl font-normal text-center lg:text-start text-dark tracking-wide ">
                   {product?.productDetails?.name}
                 </p>
                 <p className="text-xl font-normal text-dark  ">

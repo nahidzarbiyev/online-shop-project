@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrders } from '../../redux/actions/user.action'
 import { BiHeart, BiTrash } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 const Orders = () => {
     const dispatch = useDispatch()
@@ -24,9 +25,8 @@ const Orders = () => {
  return (
     order.items.map((elem)=>{
         return (
-            <div className="flex flex-col justify-between bg-secondary items-end lg:flex-row gap-5">
-                {console.log(`http://localhost:8080/public/${elem.productId.productPictures[0].img}`)}
-            
+            <Link to={`/orderDetails/${order._id}`} key={elem._id} className="flex flex-col justify-between bg-secondary items-end lg:flex-row gap-5">
+            {console.log(elem)}
            
             <div className="flex  gap-3">
             <img
@@ -44,7 +44,7 @@ const Orders = () => {
           
             </div>
               <p className='text-green-600 p-3 uppercase text-sm font-bold'> {order.paymentStatus}</p>
-          </div>
+          </Link>
         )
     }
 

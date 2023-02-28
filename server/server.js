@@ -11,11 +11,12 @@ const adminRoutes = require('./routes/admin/auth');
 const categoryRoutes = require('./routes/category')
 const productRoutes = require('./routes/product')
 const cartRoutes = require('./routes/cart')
-const initialDataRoutes = require('./routes/admin/initialdata') 
+const initialDataRoutes = require("./routes/admin/initialData");
+
 const pageRoutes = require('./routes/admin/page') 
 const addressRoutes = require("./routes/adress");
 const orderRoutes = require("./routes/order");
-const adminOrderRoute = require("./routes/admin/order.routes");
+const adminOrderRoute = require("./routes/admin/order.route");
 env.config();
 
 mongoose

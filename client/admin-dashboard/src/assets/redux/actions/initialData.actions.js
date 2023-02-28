@@ -2,6 +2,7 @@ import {
     initialDataConstants,
     categoryConstants,
     productConstants,
+    orderConstants,
 
   } from "../actions/constants";
   import axios from "../../helpers/axios";
@@ -19,8 +20,10 @@ import {
           type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
           payload: { products },
         });
-       
+        dispatch({
+          type: orderConstants.GET_CUSTOMER_ORDER_SUCCESS,
+          payload: { orders },
+        });
       }
-      console.log(res);
     };
   };

@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { signout, userLoggedin } from "../../redux/actions/auth.action";
 const Asidebar = () => {
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");

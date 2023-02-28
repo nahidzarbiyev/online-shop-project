@@ -109,6 +109,7 @@ export const getOrders = () => {
 };
 
 export const getOrder = (payload) => {
+  console.log(payload);
   return async (dispatch) => {
     try {
       const res = await axios.post(`/getOrder`, payload);

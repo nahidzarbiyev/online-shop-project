@@ -9,11 +9,9 @@ import Highlighter from 'react-highlight-words';
 import axios from "axios";
 const TableAntd = () => {
   const product = useSelector((state) => state.product);
-  console.log(product.products);
 const [toggle, setToggle] = useState(false)
 const handleModalDetails = (obj)=>{
   axios.get()
-console.log(obj);
   setToggle(!toggle)
 }
 

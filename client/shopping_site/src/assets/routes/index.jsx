@@ -21,6 +21,7 @@ import BasketPage from "../pages/basketpage";
 import { updateCart } from "../redux/actions/cart.action";
 import CheckOutOrder from "../pages/CheckOutOrderPage";
 import Orders from "../pages/OrderPage";
+import OrderDetails from "../pages/OrderPage/OrderDetails";
 
 const Routing = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,13 @@ const Routing = () => {
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/favorites" element={<Favorites/>}/>
         <Route path="/basket" element={<BasketPage/>}/>
+        {
+          auth.authenticate
+          ?
+          <Route path="/orderDetails/:orderId" element={<OrderDetails/>}/>
+          :
+          null
+        }
         {
           auth.authenticate
           ?

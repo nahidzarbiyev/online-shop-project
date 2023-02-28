@@ -34,11 +34,7 @@ const Routing = () => {
   dispatch(updateCart())
   }, [auth.authenticate]);
 
-  useEffect(() => {
-    
-  dispatch(updateCart())
-   
-  }, [])
+
   
   return (
     <>

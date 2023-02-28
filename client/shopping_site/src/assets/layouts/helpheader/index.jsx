@@ -69,7 +69,7 @@ const HelpHeader = () => {
         <div className="navbar-p p-0 border-none ">
           {" "}
           <Link className="hover:opacity-70 ">
-            Merhaba, {auth.user.fullName}
+            Merhaba, {auth?.user?.fullName}
           </Link>
           <div className="absolute dropdown top-10 bg-white z-30  right-10 transition-all duration-300 opacity-0 invisible h-0 py-10 w-[200px]  -translate-y-2  ">
             <NavLink

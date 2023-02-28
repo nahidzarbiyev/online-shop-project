@@ -1,7 +1,6 @@
 import { authConstants, cartConstants,  } from '../actions/constants';
 import axios from '../../helpers/axios'
 
-// new update signup action
 export const signup = (user) => {
   return async (dispatch) => {
     let res;

@@ -19,6 +19,8 @@ const Header = () => {
   const [asidebar, setAsidebar] = useState(true);
   const [signInState, setsignInState] = useState(true)
   const category = useSelector((state) => state.category);
+  const basket = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [nav, setnav] = useState(false);
   useEffect(() => {}, [auth.authenticate]);
@@ -28,7 +30,9 @@ const Header = () => {
   useEffect(() => {
     dispatch(getAllCategory());
   }, []);
-
+  const totalItem = Object.keys(cart.cartItems).reduce(function (qty, key) {
+    return qty + cart.cartItems[key].qty;
+  }, 0);
   const handleCategory = (categories) => {
     let categoryArray = [];
     for (let category of categories) {
@@ -104,8 +108,8 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/basket"}>
-                <CgShoppingBag className="text-2xl" />
+              <Link to={"/basket"} className='relative'>
+                <CgShoppingBag className="text-2xl" /> <span className="absolute flex  w-5 h-5 rounded-full bg-dark text-primary  justify-center items-center text-xs -top-2 -right-2">{totalItem}</span>
               </Link>
             </li>
             <li className="lg:hidden ">
@@ -132,12 +136,12 @@ const Header = () => {
 
               {auth.authenticate ? (
                 <Link className="hover:opacity-70 text-sm uppercase pt-3 ">
-                  Merhaba, {auth.user.fullName}
+                  Merhaba, {auth?.user?.fullName}
                 </Link>
               ) : null}
               <ul className={"text-sm uppercase h-[200px] overflow-y-scroll"}>
-                {category.categories.length > 0
-                  ? handleCategory(category.categories)
+                {category?.categories?.length > 0
+                  ? handleCategory(category?.categories)
                   : null}
               </ul>
           

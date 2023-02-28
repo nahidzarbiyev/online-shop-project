@@ -3,13 +3,12 @@ import { BiHeart, BiTrash } from "react-icons/bi";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addToCart, getCartItems } from "../../redux/actions/cart.action";
+import { addToCart, getCartItems, removeCartItem } from "../../redux/actions/cart.action";
 
 const BasketPage = () => {
   const basket = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
   const [cartItems, setcartItems] = useState(basket.cartItems);
-  const [qty, setqty] = useState(cartItems.qty);
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,7 +38,11 @@ const BasketPage = () => {
     const { price, qty } = cart.cartItems[key];
     return totalItem + price * qty;
   }, 0);
+  const fixtotalPrice = totalPrice.toFixed(2)
 
+  const onRemoveCartItem = (_id) => {
+    dispatch(removeCartItem({ productId: _id }));
+  };
   return (
     <div className="max-w-[1200px] flex lg:flex-row flex-col justify-between mx-auto my-16">
       <div className="w-full mx-auto">
@@ -53,7 +56,7 @@ const BasketPage = () => {
                   src={`http://localhost:8080/public/${cartItems[key].img}`}
                   alt=""
                 />
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col justify-end gap-2">
                   <p>{cartItems[key].name}</p>
 
                   <p>{cartItems[key].color?.[0]}</p>
@@ -68,7 +71,7 @@ const BasketPage = () => {
                     >
                       -
                     </button>
-                    <p>{cartItems[key].qty}</p>
+                    <p > {cartItems[key].qty}</p>
                     <button
                       className="w-10 h-10 rounded-full bg-primary  font-bold text-xl"
                       onClick={() =>
@@ -80,16 +83,16 @@ const BasketPage = () => {
                   </div>
                   <div className="flex gap-2 w-[100px] justify-between items-center">
                     <span className="flex justify-center items-center h-10 w-10 rounded-full">
-                      <BiHeart className="text-2xl text-dark" />
+                      <BiHeart className="text-2xl  text-gray-500 transition-all duration-300 hover:text-dark cursor-pointer" />
                     </span>
                     <span className="flex justify-center items-center h-10 w-10 rounded-full">
                       {" "}
-                      <BiTrash className="text-2xl text-dark" />
+                      <BiTrash className="text-2xl text-gray-500 transition-all duration-300 hover:text-dark cursor-pointer "  onClick={()=>onRemoveCartItem(cartItems[key]._id)}/>
                     </span>
                   </div>
                 </div>
               </div>
-              <p>₺ {cartItems[key].price}</p>
+              <div className="flex items-end justify-end"><p className="text-dark font-bold"> Fiyat: <span className="text-gray-500">₺ {cartItems[key].price}</span></p></div>
             </div>
           );
         })}
@@ -97,8 +100,8 @@ const BasketPage = () => {
       <div className=" w-full flex flex-col gap-3 lg:mx-0 mx-auto max-w-[300px]">
         <p className="text-dark text-2xl py-5  uppercase ">Özet</p>
         <div className="border-b-2 flex justify-between  border-b-primary">
-          <span>Ara Toplam </span> <span>₺{totalPrice}</span>
-          {<span>ürün Sayı{totalItem}</span>}
+          <span>Ara Toplam </span> <span className="text-gray-500"> ₺{fixtotalPrice}</span>
+          {<span>ürün Sayı <span className="text-gray-500">{totalItem}</span></span>}
         </div>
         <button
           className="w-full h-30 rounded-[30px] bg-dark border mt-5 hover:opacity-70 text-white py-4 flex justify-center items-center gap-2"

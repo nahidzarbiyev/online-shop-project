@@ -4,13 +4,15 @@ import { BiHeart, BiTrash } from "react-icons/bi";
 import Logo from "../../images/png/Logo_NIKE.svg.png";
 import { getAddress } from "../../redux/actions/user.action";
 import AdressForm from "./addressform";
+import { getCartItems, removeCartItem, updateCart } from "../../redux/actions/cart.action";
+import EditAdressForm from "./addressform/editAdressForm";
 
 const CheckOutOrder = () => {
   const dispatch = useDispatch();
   const [toggle, settoggle] = useState(true);
   const user = useSelector((state) => state.user);
   const auth = useSelector((state) => state.auth);
-  const cart = useSelector(state=>state.cart)
+  const cart = useSelector((state) => state.cart);
 
   const basket = useSelector((state) => state.cart);
   const [cartItems, setcartItems] = useState(basket.cartItems);
@@ -18,11 +20,12 @@ const CheckOutOrder = () => {
   const [newAddress, setNewAddress] = useState(false);
   const [confrimAddress, setConfirmAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
-  const [editform, seteditForm] = useState(null)
-  const [editadress, setEditAddress] = useState(false)
-  console.log(user.address);
+  const [editform, seteditForm] = useState([]);
+  const [editadress, setEditAddress] = useState(false);
+
   useEffect(() => {
     auth.authenticate && dispatch(getAddress());
+    auth.authenticate && dispatch(getCartItems());
   }, [auth.authenticate]);
 
   useEffect(() => {
@@ -36,45 +39,48 @@ const CheckOutOrder = () => {
 
   const selectAddress = (adr) => {
     const updatedAdres = address.map((adres) =>
-      adres._id === adr._id
-        ? { ...adres, selected: true }
-        : { ...adres, selected: false }
+    adres._id === adr._id
+    ? { ...adres, selected: true }
+    : { ...adres, selected: false }
     );
     setAdress(updatedAdres);
   };
   const handleEdit = (adr) => {
-    seteditForm(true)
+    seteditForm(true);
+    console.log(adr)
     const updatedAdres = address.map((adres) =>
       adres._id === adr._id
         ? { ...adres, edit: true }
         : { ...adres, edit: false }
     );
-    seteditForm(updatedAdres);
+    setAdress(updatedAdres);
   };
-console.log(editform)
 
   const ConfirmDeliveryAddress = (adr) => {
     setSelectedAddress(adr);
     setConfirmAddress(true);
-    setEditAddress(true)
+    setEditAddress(true);
   };
 
-  
-  const totalItem = Object.keys(cart.cartItems).reduce(function(qty,key){
-    return qty + cart.cartItems[key].qty
-  }, 0)
-  const totalPrice = Object.keys(cart.cartItems).reduce((totalItem,key)=>{
-    const {price, qty} = cart.cartItems[key]
-    return totalItem + price *qty
-  }, 0)
+  const onRemoveCartItem = (_id) => {
+    dispatch(removeCartItem({ productId: _id }));
+    dispatch(updateCart());
+  };
+  const totalItem = Object.keys(cart.cartItems).reduce(function (qty, key) {
+    return qty + cart.cartItems[key].qty;
+  }, 0);
+  const totalPrice = Object.keys(cart.cartItems).reduce((totalItem, key) => {
+    const { price, qty } = cart.cartItems[key];
+    return totalItem + price * qty;
+  }, 0);
 
   return (
     <>
       <img src={Logo} className={"w-[70px] my-16 mx-auto"} alt="" />
       <div className="max-w-[1000px] flex lg:flex-row flex-col lg:justify-between  my-16 mx-auto">
-        <div className="w-full flex flex-col mx-auto gap-2 max-w-[450px] ">
+        <div className="w-full flex flex-col lg:mx-0 mx-auto gap-2 max-w-[450px] ">
           <span className="w-full py-2 bg-primary  text-[14px] text-blue-400 uppercase">
-            <span className="w-4 h-4 rounded-full  text-[14px] text-blue-400">
+            <span className="w-4 h-4 rounded-full pl-2 text-[14px] text-blue-400">
               1
             </span>{" "}
             Login
@@ -95,7 +101,7 @@ console.log(editform)
                     : "w-full py-2 text-[14px] bg-blue-400 text-primary uppercase"
                 }
               >
-                <span className="w-4 h-4 rounded-full text-[14px] text-blue-400">
+                <span className="w-4 h-4 rounded-full pl-2 text-[14px] text-blue-400">
                   2
                 </span>{" "}
                 Teslimat Addressi
@@ -114,67 +120,76 @@ console.log(editform)
 
                   {toggle ? null : (
                     <div className="w-full flex flex-col gap-4">
-                      {
-                      confrimAddress ? <>
-                     
-                            <span>Ad Soyad:{selectedAddress?.name}</span>-
-                            <span>
-                              Bilgiler:{selectedAddress?.addressType}/
-                              <span>{selectedAddress?.alternatePhone}</span>/
-                              <span>{selectedAddress?.cityDistrictTown}</span>/
-                              <span>{selectedAddress?.landmark}</span>/
-                              <span>{selectedAddress?.locality}</span>
-                            </span>
-                            -<span>{selectedAddress?.mobileNumber}</span>
-                     
+                      {confrimAddress ? (
+                        <>
+                          {null ? (
+                            <p>{console.log(selectedAddress.edit)}</p>
+                          ) : (
+                            <>
+                              <span>Ad Soyad:{selectedAddress?.name}</span>-
+                              <span>
+                                Bilgiler:{selectedAddress?.addressType}/
+                                <span>{selectedAddress?.alternatePhone}</span>/
+                                <span>{selectedAddress?.cityDistrictTown}</span>
+                                /<span>{selectedAddress?.landmark}</span>/
+                                <span>{selectedAddress?.locality}</span>
+                              </span>
+                              -<span>{selectedAddress?.mobileNumber}</span>
                               <div className="flex gap-3 my-4">
-                                <button className=" px-10 py-2  bg-dark rounded text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary"
-                                 onClick={()=>handleEdit(selectedAddress)}
-                                >
-                                  Edit
-                                </button>{" "}
-                                <button className=" px-10 py-2  bg-dark rounded text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary">
-                                  delete
-                                </button>
+                            
+                           
                               </div>
-                      </>
-                      :
-                      address?.map((el) => {
-                        return (
-                          <div
-                            key={el._id}
-                            className="border border-secondary rounded-xl bg-primary p-5"
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        address?.map((el) => {
+                          console.log(el.edit)
+                          return (
+                        (!el.edit)
+                        ?
+                        <div
+                        key={el._id}
+                        className="border border-secondary relative rounded-xl bg-primary p-5"
+                      >
+                        <input
+                          type="radio"
+                          name="address"
+                          className="mx-3"
+                          value={el._id}
+                          onClick={() => selectAddress(el)}
+                        />
+                        <span>isim:{el?.name}</span>-
+                        <span>
+                          Bilgiler:{el?.addressType}/
+                          <span>{el?.alternatePhone}</span>/
+                          <span>{el?.cityDistrictTown}</span>/
+                          <span>{el?.landmark}</span>/
+                          <span>{el?.locality}</span>
+                        </span>
+                        -<span>{el?.mobileNumber}</span>
+                        {el?.selected ? (
+                          <div>
+                            <button
+                              className=" px-10 py-2  bg-dark rounded text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary"
+                              onClick={() => ConfirmDeliveryAddress(el)}
+                            >
+                              Bu Addresse Teslim Et
+                            </button>
+                            <button
+                            className="text-gray-500 absolute font-bold top-5 right-5 uppercase text-xs"
+                            onClick={() => handleEdit(el)}
                           >
-                            <input
-                              type="radio"
-                              name="address"
-                              className="mx-3"
-                              value={el._id}
-                              onClick={() => selectAddress(el)}
-                            />
-                            <span>isim:{el?.name}</span>-
-                            <span>
-                              Bilgiler:{el?.addressType}/
-                              <span>{el?.alternatePhone}</span>/
-                              <span>{el?.cityDistrictTown}</span>/
-                              <span>{el?.landmark}</span>/
-                              <span>{el?.locality}</span>
-                            </span>
-                            -<span>{el?.mobileNumber}</span>
-                          
-                            {el?.selected ? (
-                            <div>
-                                <button
-                                className=" px-10 py-2  bg-dark rounded text-primary transition-colors duration-300 hover:text-dark hover:bg-primary hover:border-primary"
-                                onClick={() => ConfirmDeliveryAddress(el)}
-                              >
-                                Bu Addresse Teslim Et
-                              </button>
-                            </div>
-                            ) : null}
+                            Edit
+                          </button>{" "}
                           </div>
-                        );
-                      })}
+                        ) : null}
+                      </div>
+                        :
+                        <EditAdressForm initialData={el}/>
+                          );
+                        })
+                      )}
                     </div>
                   )}
                 </>
@@ -197,22 +212,17 @@ console.log(editform)
           <button className="w-full py-7 rounded-2xl border-2 border-dark">
             Teslim Et{" "}
           </button>
-         {
-          confrimAddress ?
-          null
-          :
-          <AdressForm />
-         }
+          {confrimAddress ? null : <EditAdressForm />}
         </div>
         <div>
-          <div className="w-full mx-auto max-w-[300px] ">
+          <div className="w-full mx-auto max-w-[400px] ">
             <p className="text-dark text-2xl py-5 lg:text-start text-center   uppercase ">
               Sipariş özeti{" "}
             </p>
-            <div className="border-b-2 flex justify-between  border-b-primary">
-          <span>Ara Toplam </span> <span>₺{totalPrice}</span>
-          {<span>ürün Sayı {totalItem}</span>}
-        </div>
+            <div className="border-b-2 flex justify-between w-full gap-4  border-b-primary">
+              <span>Ara Toplam </span> <span>₺{totalPrice}</span>
+              {<span>ürün Sayı {totalItem}</span>}
+            </div>
             {Object.keys(cartItems).map((key, i) => {
               return (
                 <div className="flex  gap-5 my-10 w-full max-w-[700px]  ">
@@ -232,7 +242,10 @@ console.log(editform)
                       <div className="flex gap-2 w-[100px] justify-between items-center">
                         <span className="flex justify-center items-center h-10 w-10 rounded-full">
                           {" "}
-                          <BiTrash className="text-2xl text-secondary" />
+                          <BiTrash
+                            className="text-2xl text-secondary"
+                            onClick={() => onRemoveCartItem(cartItems[key]._id)}
+                          />
                         </span>
                       </div>
                     </div>
@@ -241,10 +254,8 @@ console.log(editform)
               );
             })}
           </div>
-          
-     
-       
         </div>
+
       </div>
     </>
   );

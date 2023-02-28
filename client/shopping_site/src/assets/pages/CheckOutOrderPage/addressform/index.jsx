@@ -40,8 +40,6 @@ const AdressForm = () => {
     }
     dispatch(addAddress(payload));
     setSubmitFlag(true);
-    console.log(payload);
-    dispatch(addAddress(payload));
   };
 
 

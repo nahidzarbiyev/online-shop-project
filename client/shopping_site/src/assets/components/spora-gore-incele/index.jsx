@@ -17,7 +17,6 @@ const SporaGoreKesfet = () => {
     infinite: true,
     autoplay:true,
     slidesToShow: 3,
-    autoplay:true,
 
     speed: 500,
     arrows: false,

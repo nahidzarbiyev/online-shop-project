@@ -170,7 +170,14 @@ const Header = () => {
                 </li>
 
                 <li>
-                  <Link>Siparişler </Link>
+                  <Link 
+                  to={
+                    
+                    '/account/orders'
+                  }
+                  
+                  
+                  >Siparişler </Link>
                 </li>
                 <li>
                   <Link>Favoriler </Link>

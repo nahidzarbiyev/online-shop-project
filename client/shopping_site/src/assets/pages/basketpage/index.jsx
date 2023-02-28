@@ -14,6 +14,8 @@ const BasketPage = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     setcartItems(basket.cartItems);
+    dispatch(getCartItems());
+
   }, [basket.cartItems]);
 
   useEffect(() => {
@@ -45,7 +47,14 @@ const BasketPage = (props) => {
   };
 
 
-
+const handleCheckout =()=>{
+  if (!auth.authenticate) {
+    navigate('/sign-in')
+  }
+  else{
+    navigate('/checkout')
+  }
+}
   if (props.cartItems) {
     return (
       <>
@@ -171,7 +180,7 @@ const BasketPage = (props) => {
         </div>
         <button
           className="w-full h-30 rounded-[30px] bg-dark border mt-5 hover:opacity-70 text-white py-4 flex justify-center items-center gap-2"
-          onClick={() => navigate("/checkout")}
+          onClick={() => handleCheckout()}
         >
           Üye Girişi Yaparak Ödeme
         </button>

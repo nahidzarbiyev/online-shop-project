@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BiHeart, BiTrash } from "react-icons/bi";
 import Logo from "../../images/png/Logo_NIKE.svg.png";
-import { getAddress } from "../../redux/actions/user.action";
+import { addOrder, getAddress } from "../../redux/actions/user.action";
 import AdressForm from "./addressform";
 import {
   getCartItems,
@@ -92,6 +92,28 @@ const CheckOutOrder = () => {
   }
 
   const confirmOrderHandle = ()=>{
+    const totalAmount = Object.keys(cart.cartItems).reduce(
+      (totalPrice, key) => {
+        const { price, qty } = cart.cartItems[key];
+        return totalPrice + price * qty;
+      },
+      0
+    );
+    const items = Object.keys(cart.cartItems).map((key) => ({
+      productId: key,
+      payablePrice: cart.cartItems[key].price,
+      purchasedQty: cart.cartItems[key].qty,
+    }));
+    const payload = {
+      addressId: selectedAddress._id,
+      totalAmount,
+      items,
+      paymentStatus: "pending",
+      paymentType: "cod",
+    };
+    console.log(payload);
+    dispatch(addOrder(payload))
+
 setConfirmOrder(true)
   }
   

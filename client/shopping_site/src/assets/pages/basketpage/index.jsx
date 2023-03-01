@@ -64,7 +64,7 @@ const handleCheckout =()=>{
           return (
           <>
             <div className="flex justify-between gap-5 my-10 w-full lg:max-w-[1000px] max-w-[400px] lg:mx-0 mx-auto ">
-              <div className="flex flex-col lg:flex-row gap-5">
+              <div className="flex flex-col justify-between items-start lg:flex-row gap-5">
                 <img
                   width={"100px"}
                   height={'80px'}

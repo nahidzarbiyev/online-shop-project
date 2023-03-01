@@ -10,26 +10,35 @@ const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-
    
   const Signuphandle = (e) => {
+    
     e.preventDefault();
     const user = { email, password, lastName, firstName };
 
     dispatch(signup(user))
 
   };
-
-    useEffect(() => {
-   
-    if (auth.authenticate) {
-      navigate('/sign-in')
-     }
   
-   }, [auth.authenticate])
+  useEffect(() => {
+    if (!user.loading) {
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+    }
+  }, [user.loading]);
+ 
+
+  if (user.loading) {
+    return <div className="h-[100vh] flex items-center justify-center">Loading...!</div>;
+  }
+
 
   return (
     <div className="max-w-[1900px] mx-auto flex justify-center h-[80vh] items-center">

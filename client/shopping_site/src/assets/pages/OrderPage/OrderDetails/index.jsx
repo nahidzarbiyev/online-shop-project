@@ -5,17 +5,14 @@ import { getOrder } from '../../../redux/actions/user.action';
 
 const OrderDetails = () => {
     const {orderId} = useParams()
-    console.log(orderId);
     const dispatch = useDispatch();
     const orderDetails = useSelector((state) => state.user.orderDetails);
     useEffect(() => {
-        console.log({ orderId });
         const payload = {
        orderId,
         };
         dispatch(getOrder(payload));
       }, [orderId]);
-      console.log(orderDetails)
       
   const formatDate = (date) => {
     if (date) {

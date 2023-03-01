@@ -22,19 +22,19 @@ import { updateCart } from "../redux/actions/cart.action";
 import CheckOutOrder from "../pages/CheckOutOrderPage";
 import Orders from "../pages/OrderPage";
 import OrderDetails from "../pages/OrderPage/OrderDetails";
+import ErrorPage from "../pages/error";
 
 const Routing = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  useEffect(() => {
-    if (!auth.authenticate) {
-      dispatch(userLoggedin());
-    }
-  }, [auth.authenticate]);
-  useEffect(() => {
-    console.log('update Cart');
-  dispatch(updateCart())
-  }, [auth.authenticate]);
+  // useEffect(() => {
+  //   if (!auth.authenticate) {
+  //     dispatch(userLoggedin());
+  //   }
+  // }, [auth.authenticate]);
+  // useEffect(() => {
+  // dispatch(updateCart())
+  // }, [auth.authenticate]);
 
 
   
@@ -50,7 +50,7 @@ const Routing = () => {
           path="/:productSlug/:productId/p"
           element={<ProductDetailPage />}
         />
-        <Route path="/:slug" exact element={<ProductsPage />} />
+        <Route path="/category/:slug" exact element={<ProductsPage />} />
         <Route path="/help" element={<Yardim />} />
         <Route path="/size" element={<Size />} />
         <Route path="/retail" element={<StoreMap />} />
@@ -59,6 +59,7 @@ const Routing = () => {
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/favorites" element={<Favorites/>}/>
         <Route path="/basket" element={<BasketPage/>}/>
+        <Route path="*" element={<ErrorPage/>}/>
         {
           auth.authenticate
           ?

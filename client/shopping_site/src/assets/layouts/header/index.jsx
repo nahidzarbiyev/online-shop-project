@@ -41,7 +41,7 @@ const Header = () => {
           <li key={category?.name}>
             {category.parentId ? (
               <Link
-                to={`/${category.slug}?cid=${category._id}&type=${category.type}`}
+                to={`/category/${category.slug}?cid=${category._id}&type=${category.type}`}
                 className="hover:text-dark py-3 "
                 key={category.name}
               >
@@ -216,7 +216,7 @@ const Header = () => {
                     : "hidden invisible opacity-0"
                 }>
                 <li>
-                  <Link>Sipariş durumu</Link>
+                  <Link >Sipariş durumu</Link>
                 </li>
 
                 <li>

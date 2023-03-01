@@ -4,6 +4,7 @@ import { BiHeart, BiTrash } from "react-icons/bi";
 import Logo from "../../images/png/Logo_NIKE.svg.png";
 import { addOrder, getAddress } from "../../redux/actions/user.action";
 import AdressForm from "./addressform";
+
 import {
   getCartItems,
   removeCartItem,
@@ -11,6 +12,7 @@ import {
 } from "../../redux/actions/cart.action";
 import EditAdressForm from "./addressform/editAdressForm";
 import BasketPage from "../basketpage";
+import { Link } from "react-router-dom";
 
 const CheckOutOrder = () => {
   const dispatch = useDispatch();
@@ -56,7 +58,6 @@ const CheckOutOrder = () => {
   };
   const handleEdit = (adr) => {
     seteditForm(true);
-    console.log(adr);
     const updatedAdres = address.map((adres) =>
       adres._id === adr._id
         ? { ...adres, edit: true }
@@ -66,10 +67,15 @@ const CheckOutOrder = () => {
   };
 
   const ConfirmDeliveryAddress = (adr) => {
-    setSelectedAddress(adr);
+    if (totalItem===0) {
+      alert("Şu an da satın alınacak ürününüz yok")
+    }
+    else{
+      setSelectedAddress(adr);
     setConfirmAddress(true);
     setEditAddress(true);
     setOrderSummary(true);
+    }
   };
 
   const onRemoveCartItem = (_id) => {
@@ -111,7 +117,6 @@ const CheckOutOrder = () => {
       paymentStatus: "pending",
       paymentType: "cod",
     };
-    console.log(payload);
     dispatch(addOrder(payload))
 
 setConfirmOrder(true)
@@ -119,7 +124,12 @@ setConfirmOrder(true)
   
   
   if (confrimOrder) {
-    return <div>Thank You</div>
+    return <div className="w-full max-w-[1200px] flex flex-col gap-5 justify-center items-center mx-auto h-[60vh]">
+<img   width={'70px'} src={Logo} alt="" />
+
+       <p className="text-xl text-dark"> Siparişiniz başarıyla onaylandı. kargo takipi için <Link className="underline " to={'/account/orders'}>SIparişlerim</Link>'e git.</p>
+       <Link className="underline " to={'/'}>Ana sayfaya dön</Link>
+    </div>
   }
   else{
     return (
@@ -174,22 +184,24 @@ setConfirmOrder(true)
                               <p>{console.log(selectedAddress.edit)}</p>
                             ) : (
                               <>
-                                <span>Ad Soyad:{selectedAddress?.name}</span>-
-                                <span>
-                                  Bilgiler:{selectedAddress?.addressType}/
-                                  <span>{selectedAddress?.alternatePhone}</span>/
+                                <div className="flex flex-col bg-secondary p-3 gap-3 my-4">
+                                <span>{selectedAddress?.name}</span>
+                                <span className="flex gap-4">
+                                  Bilgiler:{selectedAddress?.addressType}
+                                  <span>{selectedAddress?.alternatePhone}</span>
                                   <span>{selectedAddress?.cityDistrictTown}</span>
-                                  /<span>{selectedAddress?.landmark}</span>/
+                                  <span>{selectedAddress?.landmark}</span>
                                   <span>{selectedAddress?.locality}</span>
                                 </span>
-                                -<span>{selectedAddress?.mobileNumber}</span>
-                                <div className="flex gap-3 my-4"></div>
+                                <span>{selectedAddress?.mobileNumber}</span>
+
+
+                                </div>
                               </>
                             )}
                           </>
                         ) : (
                           address?.map((el) => {
-                            console.log(el.edit);
                             return !el.edit ? (
                               <div
                                 key={el._id}
@@ -202,15 +214,17 @@ setConfirmOrder(true)
                                   value={el._id}
                                   onClick={() => selectAddress(el)}
                                 />
-                                <span>isim:{el?.name}</span>-
-                                <span>
-                                  Bilgiler:{el?.addressType}/
-                                  <span>{el?.alternatePhone}</span>/
-                                  <span>{el?.cityDistrictTown}</span>/
-                                  <span>{el?.landmark}</span>/
+                               <div className="flex flex-col gap-3">
+                               <span className="text-gray-500">isim:{el?.name}</span>
+                                <span className="flex gap-3 text-gray-500 leading-3 ">
+                                  Bilgiler:{el?.addressType}
+                                  <span>{el?.alternatePhone}</span>
+                                  <span>{el?.cityDistrictTown}</span>
+                                  <span>{el?.landmark}</span>
                                   <span>{el?.locality}</span>
                                 </span>
-                                -<span>{el?.mobileNumber}</span>
+                                <span className="text-gray-400 tracking-wide">telefon: {el?.mobileNumber}</span>
+                               </div>
                                 {el?.selected ? (
                                   <div className="mt-5">
                                     <button
@@ -250,8 +264,8 @@ setConfirmOrder(true)
             <>
               <div className="w-full mx-auto">
                 <BasketPage cartItems={true} />
-                <div className="border border-gray-500 bg-gray-500 text-white p-2 flex justify-around my-5">
-                <p>Sipariş Onay e-postası e-postanıza gönderilecek</p> <button className="w-24" onClick={()=>userOrderConfirmHandle()}>Devam et</button>
+                <div className="border border-gray-500  bg-primary text-dark p-2 flex justify-around my-5">
+                <p>Sipariş Onay e-postası e-postanıza gönderilecek</p> <button className="w-24 py-2  bg-dark text-white" onClick={()=>userOrderConfirmHandle()}>Devam et</button>
               </div >
               </div>
             </>

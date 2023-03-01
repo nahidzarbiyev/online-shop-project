@@ -38,17 +38,6 @@ const handleFavorite = ()=>{
 
 }
 
-// const handleSize = ()=>{
-//   const findSize = size.find((el)=>el === e.target.value)
-//   if (!findSize) {
-//     setsize([...size, findSize])
-//   }
-//   else{
-//     setsize(size.filter((el)=>el !== e.target.value))
-//   }
-//   console.log(size)
-// }
-
   return (
     <>
       <div className="max-w-[1400px] mx-auto py-16 px-16 ">

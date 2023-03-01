@@ -26,7 +26,6 @@ const Orders = () => {
     order.items.map((elem)=>{
         return (
             <Link to={`/orderDetails/${order._id}`} key={elem._id} className="flex flex-col justify-between bg-secondary items-end lg:flex-row gap-5">
-            {console.log(elem)}
            
             <div className="flex  gap-3">
             <img

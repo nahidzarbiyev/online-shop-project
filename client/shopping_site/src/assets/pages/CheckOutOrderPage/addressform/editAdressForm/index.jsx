@@ -60,9 +60,7 @@ const EditAdressForm = (props) => {
     setSubmitFlag(true);
   };
   useEffect(() => {
-    console.log("addressCount", user.address);
     if (submitFlag) {
-      console.log("where are we", user);
       let _address = {};
       if (id) {
         _address = {

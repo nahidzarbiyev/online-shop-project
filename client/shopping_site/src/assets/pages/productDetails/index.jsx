@@ -9,6 +9,7 @@ import { addToCart } from "../../redux/actions/cart.action";
 const { Panel } = Collapse;
 import Spinns from "../../components/spins";
 import ProductStore from "../productsPage/productStore";
+import { Helmet } from "react-helmet";
 const ProductDetailPage = () => {
 
 const navigate = useNavigate()
@@ -40,6 +41,10 @@ const handleFavorite = ()=>{
 
   return (
     <>
+       <Helmet>
+    <meta charSet="utf-8" />
+    <title> {product?.productDetails?.name}</title>
+</Helmet>
       <div className="max-w-[1400px] mx-auto py-16 px-16 ">
         {product.loading ? (
           <Spinns />

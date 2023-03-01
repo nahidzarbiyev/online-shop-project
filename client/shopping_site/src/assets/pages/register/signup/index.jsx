@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../images/png/Logo_NIKE.svg.png";
@@ -41,6 +42,11 @@ const Signup = () => {
 
 
   return (
+<>
+<Helmet>
+    <meta charSet="utf-8" />
+    <title> Kayıt ol</title>
+</Helmet>
     <div className="max-w-[1900px] mx-auto flex justify-center h-[80vh] items-center">
       <form
         action=""
@@ -99,6 +105,7 @@ const Signup = () => {
         </span>
       </form>
     </div>
+</>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getOrder } from '../../../redux/actions/user.action';
@@ -49,7 +50,10 @@ const OrderDetails = () => {
 
   return (
     <div className='max-w-[1200px] py-10 mx-auto'>
-
+    <Helmet>
+        <meta charSet="utf-8" />
+        <title>{orderDetails.address.name}</title>
+      </Helmet>
 <div
    
       >

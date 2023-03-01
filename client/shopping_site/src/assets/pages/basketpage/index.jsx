@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { BiHeart, BiTrash } from "react-icons/bi";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -58,6 +59,10 @@ const handleCheckout =()=>{
   if (props.cartItems) {
     return (
       <>
+      <Helmet>
+    <meta charSet="utf-8" />
+    <title> Nike Sepet</title>
+</Helmet>
         <div className="w-full mx-auto">
         <p className="text-dark text-2xl py-5 lg:text-start text-center  uppercase ">Orders</p>
         {Object.keys(cartItems).map((key, i) => {

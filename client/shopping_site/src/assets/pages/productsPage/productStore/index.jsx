@@ -5,6 +5,7 @@ import Spinns from '../../../components/spins'
 import { getAllCategory } from '../../../redux/actions/categories.actions'
 import { getProductBySlug } from '../../../redux/actions/product.action'
 import {BiHeart} from 'react-icons/bi'
+import { Helmet } from 'react-helmet'
 
 const ProductStore = () => {
     const {slug} = useParams()
@@ -13,13 +14,16 @@ const ProductStore = () => {
     const products = useSelector(state=> state.product)
     const category = useSelector(state=> state.category)
         useEffect(() => {
-      
+      console.log(products);
         dispatch(getProductBySlug(slug))
          
         }, [slug])
     return (
         <>
-     
+         <Helmet>
+        <meta charSet="utf-8" />
+        <title>Ürünler</title>
+      </Helmet>
      
      
      {
@@ -31,7 +35,7 @@ const ProductStore = () => {
         {
          products?.products?.map((product)=>{
            return (
-           <Link to={`/${product.slug}/${product._id}/p`} key={product?._id} className='max-w-[500px] relative flex flex-col gap-2 text-gray-500'>
+           <Link to={`/${product?.slug}/${product?._id}/p`} key={product?._id} className='max-w-[500px] relative flex flex-col gap-2 text-gray-500'>
              <img className='  w-full ' src={`http://localhost:8080/public/${product?.productPictures[0]?.img}`} alt="" />
             <span className='w-10 h-10 rounded-full absolute top-5 right-5 bg-primary flex justify-center items-center'> <BiHeart className="text-2xl " /></span>
      

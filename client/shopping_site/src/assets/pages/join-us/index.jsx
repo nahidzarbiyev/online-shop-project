@@ -7,9 +7,16 @@ import ImgBestUser4 from "../../images/join-us/nike-üyeliği (3).jpg";
 import ImgBestUser5 from "../../images/join-us/nike-üyeliği (4).jpg";
 import ImgBestUser6 from "../../images/join-us/nike-üyeliği (5).jpg";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Joinus = () => {
   return (
+<>
+
+<Helmet>
+    <meta charSet="utf-8" />
+    <title>Join Us</title>
+</Helmet>
     <div className="container  mx-auto max-w-[1900px] p-10 flex flex-col gap-16 w-full">
       <div>
         <h1 className="text-dark text-2xl">Nike Üyeliği</h1>
@@ -137,6 +144,7 @@ mi arıyordun?</p>
             </Link>
 </div>
     </div>
+</>
   );
 };
 

@@ -9,8 +9,10 @@ import Rehberlik from '../../components/rehberlik'
 import SporaGoreKesfet from '../../components/spora-gore-incele'
 import UrunInceleme from '../../components/urun-inceleme'
 import { userLoggedin } from '../../redux/actions/auth.actions'
+import {Helmet} from "react-helmet";
 
 const Home = () => {
+
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   // useEffect(() => {
@@ -20,6 +22,11 @@ const Home = () => {
   // }, [auth.authenticate]);
   return (
  <>
+    <Helmet>
+                <meta charSet="utf-8" />
+                <title>Nike Tr</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
  <UrunInceleme/>
  <BannerVideo/>
  <ProductSlides/>
